@@ -13,3 +13,7 @@
 5. ChatGPT оценивает результат и переводит задачу в `status:done` или создаёт следующую задачу.
 
 Автоматическое выполнение задач на первом этапе не подключается.
+
+## Completion sprint checkpoint — 2026-09-04
+
+Текущий BRODETAIL completion sprint продолжает локальную/offline-подготовку по активному backlog; production deploys, DNS/runtime/config, CRM/базы и клиентские данные остаются без изменений и за закрытыми approval gates.
