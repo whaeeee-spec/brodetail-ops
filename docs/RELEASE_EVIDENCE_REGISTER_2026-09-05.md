@@ -1,6 +1,7 @@
 # BRODETAIL release evidence register
 
 Date: 2026-09-05
+Last update: 2026-09-06
 Purpose: separate `local`, `tested`, `deployed`, `canary`, `production` and `unknown` so PASS cannot leak across levels.
 
 ## Evidence levels
@@ -21,7 +22,7 @@ Purpose: separate `local`, `tested`, `deployed`, `canary`, `production` and `unk
 | CRM health | running CRM service | health probe | deployed | `/api/health` 200 JSON | `PRODUCTION_VERIFIED` for health only |
 | Website commerce intake #41 | canonical adapter exists | tested + replay | deployed | 201 first, 200 replay, one inbound event | `CANARY_VERIFIED` for #41 scope only |
 | BroWheel/Cabinet #45 | Node/VPS candidate + Docker/Caddy artifacts | local build/start; runtime tests; synthetic booking replay | not deployed | none | `LOCAL_READY / HOLD` pending canonical writer/lifecycle wiring and production release evidence |
-| Clean URLs / site route contract | static `.html` files exist | live probes | partial | `/browheel`/clean service URLs checked 404; localhost Cabinet link exists in released HTML | `HOLD` until route manifest/fixes are proven |
+| Public routing #51 | immutable static release `issue51-a4b67cfa`; route manifest SHA-256 `a4b67cfaf24bf7ee5cdf35733cf15f7498a7982b5063746f53929f6cc785c374`; Caddyfile SHA-256 `a4c1812fffe4c9db3212b2621286eac54e4c615bebd104f5bc63386e6866f1d8` | target-image `caddy validate` PASS; 48-entry manifest smoke PASS | production Caddy volume + validated restart | clean routes incl. `/browheel`, `/cabinet`, service URLs = 200; legacy `.html` = 308; held APIs = 503; #41 non-write regression GET/HEAD 405 + OPTIONS 204 unchanged; CRM health 200; external client probes 200 | `CANARY_VERIFIED` for routing/fail-closed boundary; dynamic chat/booking/cabinet/BRODESIGN writers remain `HOLD` |
 | Website Yan `/api/chat` | historical/local code exists | not accepted for production | not proven | live probe 404 | `HOLD` |
 | VK/Avito → CRM #39/#47 | adapters/canary/preflight package | offline canary PASS; eligibility/wiring tests PASS | CRM writer intentionally OFF | real agreed-visit repro exists without CRM lead; no approved live canary | `OFFLINE_READY / HOLD`; SEND OFF, writer requires explicit approval |
 | D1 → PostgreSQL reconciliation | redacted mapping/contract/runbook | typed mapping/tests; apply refusal works | no apply | no fresh target reconciliation | `OFFLINE_READY / HOLD`; D1 is migration source only |
@@ -33,7 +34,7 @@ Purpose: separate `local`, `tested`, `deployed`, `canary`, `production` and `unk
 
 ## Open evidence blockers, normalized
 
-1. **Route/runtime identity:** exact deployed source SHA/image digest/config hash is missing for several components.
+1. **Route/runtime identity:** exact deployed source SHA/image digest/config hash is missing for several components; #51 now has immutable release, manifest and Caddy hashes recorded.
 2. **Canonical writer boundary:** #45 must not create independent operational clients/cars/bookings/orders/finance in Node SQLite.
 3. **Channel delivery:** #47 is offline-ready; writer remains deliberately disabled until a controlled production task is approved.
 4. **Fresh CRM projection:** #46 commercial metrics and full reconciliation remain blocked by one fresh validated redacted CRM export/snapshot.
