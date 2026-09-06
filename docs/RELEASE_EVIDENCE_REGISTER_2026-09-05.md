@@ -29,7 +29,7 @@ Purpose: separate `local`, `tested`, `deployed`, `canary`, `production` and `unk
 | CHAT_OUTCOME #35/#46 | 2,755 outcome + evaluator materialization + importer/contracts | deterministic tests and repeat materialization PASS | analytics only/local | scoring eligible 0; commercial metrics UNKNOWN/null | `OFFLINE_READY`; blocked only on fresh validated redacted CRM export |
 | BRO DETAIL TV #33 | standalone read-only runtime exists | local tests reported PASS | not proven | live `brodetail.ru/tv` check 502 | `LOCAL_READY / HOLD` until canonical read projection + healthy route |
 | Glass #42/#48 | trusted test flag, canary script, Timeweb/Caddy package | glass tests PASS; standard build/CI incomplete | not deployed | production page/CRM/photo/Metrika not run | `PARTIAL / HOLD`; clean Linux CI then separately approved staging/canary |
-| Result Relay #36/#49/#43 | supported Work/GitHub route + local dispatcher | real Work #49 acceptance PASS | control-plane active | one real Work receipt proven | `PRODUCTION_PARTIAL`; completeness/dedup across all terminal jobs still requires deterministic reconciliation |
+| Result Relay #36/#49/#43/#50 | supported Work/GitHub route + deterministic reconciler/backfill | real Work #49 acceptance PASS; #50 self-test + idempotency PASS | control-plane active | scoped #32..#51 reconciliation: 35/35 topic receipts covered, 0 missing, 20 duplicate groups with one payload variant each, 0 conflicts | `PRODUCTION_PARTIAL`; scoped completeness/dedup verified, future receipts must pass deterministic reconciliation |
 | Backup/recovery | backup container/savepoints described | no independent restore drill evidence in current control plane | production backup mechanism exists/partially known | independent restore/RPO/RTO UNKNOWN | `HOLD` before risky migration/release |
 
 ## Open evidence blockers, normalized
@@ -40,7 +40,7 @@ Purpose: separate `local`, `tested`, `deployed`, `canary`, `production` and `unk
 4. **Fresh CRM projection:** #46 commercial metrics and full reconciliation remain blocked by one fresh validated redacted CRM export/snapshot.
 5. **Glass build:** #48 requires clean Linux CI before staging/canary; production remains separately gated.
 6. **Recovery:** independent restore drill and agreed RPO/RTO are not yet proven.
-7. **Ledger completeness:** terminal receipts must be deterministically reconciled into the canonical feed without duplicates.
+7. **Ledger completeness:** scoped #32..#51 is reconciled with 0 missing and 0 conflicts; future receipts must pass the deterministic #50 reconciliation before #43 is treated as complete.
 
 ## Dispatch policy
 

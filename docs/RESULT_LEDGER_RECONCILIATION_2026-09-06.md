@@ -1,4 +1,4 @@
-# BRODETAIL RESULT LEDGER reconciliation вЂ” 2026-09-06
+# BRODETAIL RESULT LEDGER reconciliation -- 2026-09-06
 
 Scope: issues `#32..#51`, excluding canonical ledger `#43` and historical duplicate ledger `#44` as topic sources.
 Canonical ledger: `#43`.
