@@ -58,6 +58,16 @@ function group(rows) {
   for (const r of rows) { if (!g.has(r.receipt_id)) g.set(r.receipt_id, []); g.get(r.receipt_id).push(r); }
   return g;
 }
+function crossConflictRows(topic, ledger) {
+  const out = [];
+  for (const rid of [...topic.keys()].filter(x => ledger.has(x)).sort()) {
+    const topicHashes = new Set(topic.get(rid).map(r => r.payload_sha256));
+    const ledgerHashes = new Set(ledger.get(rid).map(r => r.payload_sha256));
+    const overlap = [...topicHashes].some(h => ledgerHashes.has(h));
+    if (!overlap) out.push({receipt_id:rid, topic_variants:topicHashes.size, ledger_variants:ledgerHashes.size});
+  }
+  return out;
+}
 function reconcile(scope) {
   const topicRows = [];
   for (const i of scope) if (i !== LEDGER && i !== DUP_LEDGER) topicRows.push(...extract(i, comments(i)));
@@ -73,6 +83,7 @@ function reconcile(scope) {
       if (hashes.size > 1) conflicts.push({location, receipt_id:rid, payload_variants:hashes.size});
     }
   }
+  const crossConflicts = crossConflictRows(topic, ledger);
   const missing = [...topicIds].filter(x => !ledgerIds.has(x)).sort();
   const ledgerOnly = [...ledgerIds].filter(x => !topicIds.has(x)).sort();
   const evidence = [...topic.entries()].sort().map(([rid,rows]) => {
@@ -84,8 +95,8 @@ function reconcile(scope) {
   return {
     schema:'brodetail.result-ledger-reconciliation/v0.1', repo:REPO, scope,
     ledger_issue:LEDGER, duplicate_ledger_issue:DUP_LEDGER,
-    counts:{topic_receipt_occurrences:topicRows.length, topic_unique_receipts:topicIds.size, ledger_receipt_occurrences:ledgerRows.length, ledger_unique_receipts:ledgerIds.size, covered_topic_receipts:[...topicIds].filter(x=>ledgerIds.has(x)).length, missing_from_ledger:missing.length, ledger_only:ledgerOnly.length, duplicate_groups:duplicates.length, conflict_groups:conflicts.length},
-    missing_from_ledger:missing, ledger_only:ledgerOnly, duplicates, conflicts, evidence, blockers,
+    counts:{topic_receipt_occurrences:topicRows.length, topic_unique_receipts:topicIds.size, ledger_receipt_occurrences:ledgerRows.length, ledger_unique_receipts:ledgerIds.size, covered_topic_receipts:[...topicIds].filter(x=>ledgerIds.has(x)).length, missing_from_ledger:missing.length, ledger_only:ledgerOnly.length, duplicate_groups:duplicates.length, conflict_groups:conflicts.length + crossConflicts.length},
+    missing_from_ledger:missing, ledger_only:ledgerOnly, duplicates, conflicts, cross_location_conflicts:crossConflicts, evidence, blockers,
     idle_policy:{ai_calls:0,codex_calls:0,dispatch_on_unchanged_fingerprint:false},
   };
 }
@@ -100,6 +111,11 @@ function selfTest() {
   const g=group([{receipt_id:'d',payload_sha256:'a'},{receipt_id:'d',payload_sha256:'a'},{receipt_id:'c',payload_sha256:'a'},{receipt_id:'c',payload_sha256:'b'}]);
   if (g.get('d').length!==2 || new Set(g.get('d').map(x=>x.payload_sha256)).size!==1) throw new Error('duplicate test');
   if (new Set(g.get('c').map(x=>x.payload_sha256)).size!==2) throw new Error('conflict test');
+  const sameTopic=group([{receipt_id:'z',payload_sha256:'a'}]);
+  const sameLedger=group([{receipt_id:'z',payload_sha256:'a'}]);
+  const diffLedger=group([{receipt_id:'z',payload_sha256:'b'}]);
+  if (crossConflictRows(sameTopic,sameLedger).length!==0) throw new Error('cross match test');
+  if (crossConflictRows(sameTopic,diffLedger).length!==1) throw new Error('cross conflict test');
   console.log('SELF_TEST=PASS');
 }
 

@@ -13,7 +13,7 @@ Initial reconciliation found:
 - topic receipts covered by #43 before backfill: `0/34`;
 - missing from #43: `34`;
 - topic duplicate groups: `20`;
-- conflicting payload groups: `0`.
+- conflicting payload groups: `0`;`n- cross-location topic vs #43 payload conflicts: `0`.
 
 Because all duplicate groups had exactly one payload variant, deterministic backfill to #43 was safe after the report was materialized. The backfill posted each missing `receipt_id` once.
 
@@ -23,7 +23,7 @@ Final reconciliation:
 - topic coverage: `35/35`;
 - missing from #43: `0`;
 - ledger-only receipts: `6`;
-- conflicting payload groups: `0`.
+- conflicting payload groups: `0`;`n- cross-location topic vs #43 payload conflicts: `0`.
 
 ## Duplicate and conflict interpretation
 
@@ -73,7 +73,7 @@ The reconciler and backfill utilities contain no AI/Codex invocation path. `idle
 
 ## Tests
 
-- `node tools/reconcile-result-ledger.mjs --self-test` -> `SELF_TEST=PASS`;
+- `node tools/reconcile-result-ledger.mjs --self-test` -> `SELF_TEST=PASS` (duplicate, conflict, cross-location conflict, evidence-level and blocker-fingerprint tests);
 - first backfill dry-run -> `MISSING_BEFORE=34`, `BACKFILL_POSTED=0`;
 - controlled canonical backfill -> `BACKFILL_POSTED=34`;
 - post-receipt reconciliation -> `35/35` topic coverage, `0` missing, `0` conflicts;
