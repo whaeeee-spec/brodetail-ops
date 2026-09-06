@@ -1,0 +1,472 @@
+{
+  "schema": "brodetail.result-ledger-reconciliation/v0.1",
+  "repo": "whaeeee-spec/brodetail-ops",
+  "scope": [
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51
+  ],
+  "ledger_issue": 43,
+  "duplicate_ledger_issue": 44,
+  "counts": {
+    "topic_receipt_occurrences": 54,
+    "topic_unique_receipts": 34,
+    "ledger_receipt_occurrences": 40,
+    "ledger_unique_receipts": 40,
+    "covered_topic_receipts": 34,
+    "missing_from_ledger": 0,
+    "ledger_only": 6,
+    "duplicate_groups": 20,
+    "conflict_groups": 0
+  },
+  "missing_from_ledger": [],
+  "ledger_only": [
+    "chatgpt-20260905-route-writer-matrix",
+    "chatgpt-issue51-public-routing-canary-20260906",
+    "work-issue-49-completion-checkpoint-20260904",
+    "work-smoke-20260904-crm-finance",
+    "work-smoke-20260904-headquarters",
+    "work-smoke-20260904-ledger-reuse"
+  ],
+  "duplicates": [
+    {
+      "location": "topic",
+      "receipt_id": "08b25cca-0be7-4c37-87f3-e30acf67a1be",
+      "occurrences": 2,
+      "payload_variants": 1
+    },
+    {
+      "location": "topic",
+      "receipt_id": "0c83736d-e1d7-408f-bb6c-a0420291f376",
+      "occurrences": 2,
+      "payload_variants": 1
+    },
+    {
+      "location": "topic",
+      "receipt_id": "1d0e8357-0ba9-4ccb-a4b4-771ee677fade",
+      "occurrences": 2,
+      "payload_variants": 1
+    },
+    {
+      "location": "topic",
+      "receipt_id": "22ab7694-9c07-4d70-b779-819a0f7052bb",
+      "occurrences": 2,
+      "payload_variants": 1
+    },
+    {
+      "location": "topic",
+      "receipt_id": "3939e521-2d19-4541-ad01-1eee726f79f6",
+      "occurrences": 2,
+      "payload_variants": 1
+    },
+    {
+      "location": "topic",
+      "receipt_id": "45750604-64a4-4fb9-8e21-bedcb63f71b6",
+      "occurrences": 2,
+      "payload_variants": 1
+    },
+    {
+      "location": "topic",
+      "receipt_id": "4c2311d2-74d1-445a-82c7-44617155383f",
+      "occurrences": 2,
+      "payload_variants": 1
+    },
+    {
+      "location": "topic",
+      "receipt_id": "69326617-ffc3-40c9-8901-2971bf02516c",
+      "occurrences": 2,
+      "payload_variants": 1
+    },
+    {
+      "location": "topic",
+      "receipt_id": "6a8b83f0-7a3c-403d-9298-b7edef0d4df3",
+      "occurrences": 2,
+      "payload_variants": 1
+    },
+    {
+      "location": "topic",
+      "receipt_id": "72581136-9335-417f-a282-fe654458ee79",
+      "occurrences": 2,
+      "payload_variants": 1
+    },
+    {
+      "location": "topic",
+      "receipt_id": "7c700626-b928-406e-b342-e61a4281f944",
+      "occurrences": 2,
+      "payload_variants": 1
+    },
+    {
+      "location": "topic",
+      "receipt_id": "7d9daefb-f582-415f-b762-50f9c95297e4",
+      "occurrences": 2,
+      "payload_variants": 1
+    },
+    {
+      "location": "topic",
+      "receipt_id": "8b561676-2e55-4a1d-9677-1f61a7ed8329",
+      "occurrences": 2,
+      "payload_variants": 1
+    },
+    {
+      "location": "topic",
+      "receipt_id": "8ca4540e-9fe6-467a-8ae0-04e5b0be4848",
+      "occurrences": 2,
+      "payload_variants": 1
+    },
+    {
+      "location": "topic",
+      "receipt_id": "9c1abb95-a706-4cf5-8546-ddc7b08e1cb8",
+      "occurrences": 2,
+      "payload_variants": 1
+    },
+    {
+      "location": "topic",
+      "receipt_id": "9ca6fba3-b69d-4a42-a0ca-666e1d75ea75",
+      "occurrences": 2,
+      "payload_variants": 1
+    },
+    {
+      "location": "topic",
+      "receipt_id": "b2198627-dbef-43ad-a24f-9d14808a076c",
+      "occurrences": 2,
+      "payload_variants": 1
+    },
+    {
+      "location": "topic",
+      "receipt_id": "c71dd202-6af7-4e05-a271-00259750ad56",
+      "occurrences": 2,
+      "payload_variants": 1
+    },
+    {
+      "location": "topic",
+      "receipt_id": "ed7e214f-fcb1-4a08-bde3-ad87fed31ad1",
+      "occurrences": 2,
+      "payload_variants": 1
+    },
+    {
+      "location": "topic",
+      "receipt_id": "f023b794-46b4-4ad7-939b-07eedd4176fe",
+      "occurrences": 2,
+      "payload_variants": 1
+    }
+  ],
+  "conflicts": [],
+  "evidence": [
+    {
+      "receipt_id": "08b25cca-0be7-4c37-87f3-e30acf67a1be",
+      "issue": 39,
+      "result": "BLOCKED",
+      "level": "HOLD"
+    },
+    {
+      "receipt_id": "0c83736d-e1d7-408f-bb6c-a0420291f376",
+      "issue": 39,
+      "result": "PASS",
+      "level": "LOCAL_READY"
+    },
+    {
+      "receipt_id": "187c5aef-aeaf-4580-848d-0d9ab61e3749",
+      "issue": 38,
+      "result": "PASS",
+      "level": "OFFLINE_READY"
+    },
+    {
+      "receipt_id": "1d0e8357-0ba9-4ccb-a4b4-771ee677fade",
+      "issue": 39,
+      "result": "PASS",
+      "level": "LOCAL_READY"
+    },
+    {
+      "receipt_id": "22ab7694-9c07-4d70-b779-819a0f7052bb",
+      "issue": 35,
+      "result": "BLOCKED",
+      "level": "HOLD"
+    },
+    {
+      "receipt_id": "3939e521-2d19-4541-ad01-1eee726f79f6",
+      "issue": 39,
+      "result": "BLOCKED",
+      "level": "HOLD"
+    },
+    {
+      "receipt_id": "45750604-64a4-4fb9-8e21-bedcb63f71b6",
+      "issue": 39,
+      "result": "PASS",
+      "level": "LOCAL_READY"
+    },
+    {
+      "receipt_id": "4c2311d2-74d1-445a-82c7-44617155383f",
+      "issue": 39,
+      "result": "BLOCKED",
+      "level": "HOLD"
+    },
+    {
+      "receipt_id": "69326617-ffc3-40c9-8901-2971bf02516c",
+      "issue": 37,
+      "result": "BLOCKED",
+      "level": "HOLD"
+    },
+    {
+      "receipt_id": "6a8b83f0-7a3c-403d-9298-b7edef0d4df3",
+      "issue": 35,
+      "result": "BLOCKED",
+      "level": "HOLD"
+    },
+    {
+      "receipt_id": "72581136-9335-417f-a282-fe654458ee79",
+      "issue": 36,
+      "result": "PASS",
+      "level": "LOCAL_READY"
+    },
+    {
+      "receipt_id": "7c700626-b928-406e-b342-e61a4281f944",
+      "issue": 36,
+      "result": "PASS",
+      "level": "LOCAL_READY"
+    },
+    {
+      "receipt_id": "7d9daefb-f582-415f-b762-50f9c95297e4",
+      "issue": 38,
+      "result": "PASS",
+      "level": "LOCAL_READY"
+    },
+    {
+      "receipt_id": "8b561676-2e55-4a1d-9677-1f61a7ed8329",
+      "issue": 45,
+      "result": "FAIL",
+      "level": "HOLD"
+    },
+    {
+      "receipt_id": "8ca4540e-9fe6-467a-8ae0-04e5b0be4848",
+      "issue": 45,
+      "result": "PASS",
+      "level": "LOCAL_READY"
+    },
+    {
+      "receipt_id": "8e0d2af5-35b3-4f0f-8a24-953dda4c675c",
+      "issue": 39,
+      "result": "PARTIAL",
+      "level": "UNKNOWN"
+    },
+    {
+      "receipt_id": "9c1abb95-a706-4cf5-8546-ddc7b08e1cb8",
+      "issue": 39,
+      "result": "BLOCKED",
+      "level": "HOLD"
+    },
+    {
+      "receipt_id": "9ca6fba3-b69d-4a42-a0ca-666e1d75ea75",
+      "issue": 39,
+      "result": "PASS",
+      "level": "LOCAL_READY"
+    },
+    {
+      "receipt_id": "b2198627-dbef-43ad-a24f-9d14808a076c",
+      "issue": 33,
+      "result": "BLOCKED",
+      "level": "HOLD"
+    },
+    {
+      "receipt_id": "brodetail-50-public-routing-20260905",
+      "issue": 50,
+      "result": "PASS",
+      "level": "UNKNOWN"
+    },
+    {
+      "receipt_id": "c71dd202-6af7-4e05-a271-00259750ad56",
+      "issue": 36,
+      "result": "PASS",
+      "level": "LOCAL_READY"
+    },
+    {
+      "receipt_id": "chatgpt-20260904-issue32-runtime-compat",
+      "issue": 32,
+      "result": "PARTIAL",
+      "level": "OFFLINE_READY"
+    },
+    {
+      "receipt_id": "chatgpt-20260904-issue33-tv-runtime",
+      "issue": 33,
+      "result": "PARTIAL",
+      "level": "OFFLINE_READY"
+    },
+    {
+      "receipt_id": "chatgpt-20260904-issue35-full-history",
+      "issue": 35,
+      "result": "PARTIAL",
+      "level": "OFFLINE_READY"
+    },
+    {
+      "receipt_id": "chatgpt-20260904-issue36-relay-hardening",
+      "issue": 36,
+      "result": "PARTIAL",
+      "level": "OFFLINE_READY"
+    },
+    {
+      "receipt_id": "chatgpt-20260904-issue39-offline-dryrun",
+      "issue": 39,
+      "result": "PARTIAL",
+      "level": "OFFLINE_READY"
+    },
+    {
+      "receipt_id": "chatgpt-37-health-20260901",
+      "issue": 37,
+      "result": "PARTIAL",
+      "level": "OFFLINE_READY"
+    },
+    {
+      "receipt_id": "codex-34-host-d1-audit-20260901",
+      "issue": 34,
+      "result": "PARTIAL",
+      "level": "OFFLINE_READY"
+    },
+    {
+      "receipt_id": "codex-issue-45-node-vps-compat",
+      "issue": 45,
+      "result": "PASS",
+      "level": "UNKNOWN"
+    },
+    {
+      "receipt_id": "codex-issue-46-chat-outcome-readiness-20260905",
+      "issue": 46,
+      "result": "PASS",
+      "level": "OFFLINE_READY"
+    },
+    {
+      "receipt_id": "ed7e214f-fcb1-4a08-bde3-ad87fed31ad1",
+      "issue": 39,
+      "result": "BLOCKED",
+      "level": "HOLD"
+    },
+    {
+      "receipt_id": "f023b794-46b4-4ad7-939b-07eedd4176fe",
+      "issue": 34,
+      "result": "PASS",
+      "level": "LOCAL_READY"
+    },
+    {
+      "receipt_id": "issue-47",
+      "issue": 47,
+      "result": "PASS",
+      "level": "OFFLINE_READY"
+    },
+    {
+      "receipt_id": "issue-48-codex-glass-readiness-20260905",
+      "issue": 48,
+      "result": "PARTIAL",
+      "level": "UNKNOWN"
+    }
+  ],
+  "blockers": [
+    {
+      "receipt_id": "08b25cca-0be7-4c37-87f3-e30acf67a1be",
+      "fingerprint": "577dcd95774214d2b1b9a9edddb6fa107905205e27fa65bbc0c6ea71c801c9e1"
+    },
+    {
+      "receipt_id": "22ab7694-9c07-4d70-b779-819a0f7052bb",
+      "fingerprint": "ff50640a1cfd92462dcad1eae99accfe2a38b1710c13320e7057a335acc13c89"
+    },
+    {
+      "receipt_id": "3939e521-2d19-4541-ad01-1eee726f79f6",
+      "fingerprint": "7ef58c4f5f8035b76a2c2618f6c4506ce4944b62e0e9e5978f8abf9941dba780"
+    },
+    {
+      "receipt_id": "4c2311d2-74d1-445a-82c7-44617155383f",
+      "fingerprint": "31d8b6bf39490e8bb968743ffb202cfe0c535edafee2918a0629e8c9e5df181d"
+    },
+    {
+      "receipt_id": "69326617-ffc3-40c9-8901-2971bf02516c",
+      "fingerprint": "02ed24b03044c053c35725649e4c36d655e5efad840caf079ec4a5a2b3122a4e"
+    },
+    {
+      "receipt_id": "6a8b83f0-7a3c-403d-9298-b7edef0d4df3",
+      "fingerprint": "42e87167f0cb2db6da9bebef01230c96dc257dc9133e3fb7804447c05f38de49"
+    },
+    {
+      "receipt_id": "8b561676-2e55-4a1d-9677-1f61a7ed8329",
+      "fingerprint": "9c09a0277ddbd3d48c0a89f445b625d0380e3441586e53ab5ad9be055d7eb1c4"
+    },
+    {
+      "receipt_id": "8e0d2af5-35b3-4f0f-8a24-953dda4c675c",
+      "fingerprint": "aa018a898e6b6e1e9aa6099df06234231673e3078cfa367cc754b26d373aa359"
+    },
+    {
+      "receipt_id": "9c1abb95-a706-4cf5-8546-ddc7b08e1cb8",
+      "fingerprint": "2809a85219d750daa73659e9c43f76a4e2f4a4ba723bbf08140f29b9108199b7"
+    },
+    {
+      "receipt_id": "b2198627-dbef-43ad-a24f-9d14808a076c",
+      "fingerprint": "0f63439bd5cc6416607f026ebe7dc529ccae0364f51b12ce9aa201493480e754"
+    },
+    {
+      "receipt_id": "brodetail-50-public-routing-20260905",
+      "fingerprint": "96d338c49ad6beeb499586742ef93820448b5947b6567538fa4a2ccb56edd33d"
+    },
+    {
+      "receipt_id": "chatgpt-20260904-issue32-runtime-compat",
+      "fingerprint": "bf58f5bb7aa23225377a387b7c5f83bad932d194c03fc633e9a6f2066ea5c80e"
+    },
+    {
+      "receipt_id": "chatgpt-20260904-issue33-tv-runtime",
+      "fingerprint": "e0b9c25d4d108308ecfb2129e0aca1e439200d5923ebe25cd365a4c84398af93"
+    },
+    {
+      "receipt_id": "chatgpt-20260904-issue35-full-history",
+      "fingerprint": "69a30355358f132d777cf372cc446b9bd35a337c7cf6e2a3fc16ca10681de801"
+    },
+    {
+      "receipt_id": "chatgpt-20260904-issue36-relay-hardening",
+      "fingerprint": "7cd40e58c080ff2debc36a1baf35e7bb0808dd5661d24fac9641e464a414e4ea"
+    },
+    {
+      "receipt_id": "chatgpt-20260904-issue39-offline-dryrun",
+      "fingerprint": "922081e4b555974cf52c9cebc1307599baa33ae707a4d57743cd4ddf9fb7f3d0"
+    },
+    {
+      "receipt_id": "chatgpt-37-health-20260901",
+      "fingerprint": "8586a13697d72ad8b45a70a4edbe9bd747a2b5b99cf171096b6273d00cb8bc35"
+    },
+    {
+      "receipt_id": "codex-34-host-d1-audit-20260901",
+      "fingerprint": "2f1cac6c2624eb282d1fc13df949a4ef940587d7cf3b33465c02b27d2dd68adf"
+    },
+    {
+      "receipt_id": "codex-issue-46-chat-outcome-readiness-20260905",
+      "fingerprint": "0ac3af3d56bb3b0031bca57d12b39a4c8326ef9993631bd1010a82fc372cf6ad"
+    },
+    {
+      "receipt_id": "ed7e214f-fcb1-4a08-bde3-ad87fed31ad1",
+      "fingerprint": "d533f6515102429c3903e745e9458a442967775cfb368e116a4ed4b21d7022c6"
+    },
+    {
+      "receipt_id": "issue-47",
+      "fingerprint": "d080d2aa1ecae2af6b5dbe2008f78e9e627c70f4c7e9e8136ce2f4f322bd4d1c"
+    },
+    {
+      "receipt_id": "issue-48-codex-glass-readiness-20260905",
+      "fingerprint": "aa7ca11d3c2cad041d36e67d4b9389972d26317455a5dead531847ebfde35f48"
+    }
+  ],
+  "idle_policy": {
+    "ai_calls": 0,
+    "codex_calls": 0,
+    "dispatch_on_unchanged_fingerprint": false
+  }
+}
