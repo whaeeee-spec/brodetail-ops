@@ -1,4 +1,4 @@
-# BRODETAIL RESULT LEDGER reconciliation — 2026-09-06
+# BRODETAIL RESULT LEDGER reconciliation вЂ” 2026-09-06
 
 Scope: issues `#32..#51`, excluding canonical ledger `#43` and historical duplicate ledger `#44` as topic sources.
 Canonical ledger: `#43`.
@@ -18,9 +18,9 @@ Initial reconciliation found:
 Because all duplicate groups had exactly one payload variant, deterministic backfill to #43 was safe after the report was materialized. The backfill posted each missing `receipt_id` once.
 
 Final reconciliation:
-- canonical ledger occurrences: `40`;
-- canonical ledger unique receipts: `40`;
-- topic coverage: `34/34`;
+- canonical ledger occurrences: `41`;
+- canonical ledger unique receipts: `41`;
+- topic coverage: `35/35`;
 - missing from #43: `0`;
 - ledger-only receipts: `6`;
 - conflicting payload groups: `0`.
@@ -42,7 +42,7 @@ Conservative rules:
 - any deployment claim without an explicit supported evidence level -> `UNKNOWN`;
 - explicit valid levels may be `LOCAL_READY`, `OFFLINE_READY`, `DEPLOYED`, `CANARY_VERIFIED`, `PRODUCTION_VERIFIED`, `HOLD`, `UNKNOWN`.
 
-Current topic classification: `HOLD=10`, `LOCAL_READY=10`, `OFFLINE_READY=10`, `UNKNOWN=4`.
+Current topic classification: `HOLD=10`, `LOCAL_READY=10`, `OFFLINE_READY=11`, `UNKNOWN=4`.
 
 Incomplete/unknown evidence receipts:
 - `8e0d2af5-35b3-4f0f-8a24-953dda4c675c`;
@@ -76,7 +76,7 @@ The reconciler and backfill utilities contain no AI/Codex invocation path. `idle
 - `node tools/reconcile-result-ledger.mjs --self-test` -> `SELF_TEST=PASS`;
 - first backfill dry-run -> `MISSING_BEFORE=34`, `BACKFILL_POSTED=0`;
 - controlled canonical backfill -> `BACKFILL_POSTED=34`;
-- post-backfill reconciliation -> `34/34` topic coverage, `0` missing, `0` conflicts;
+- post-receipt reconciliation -> `35/35` topic coverage, `0` missing, `0` conflicts;
 - second backfill dry-run -> `MISSING_BEFORE=0`, `BACKFILL_POSTED=0` (idempotency PASS).
 
 No production, CRM data/schema, runtime, DNS, SEND, ads, secrets, PII or raw chats were touched.

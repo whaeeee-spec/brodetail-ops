@@ -26,11 +26,11 @@
   "ledger_issue": 43,
   "duplicate_ledger_issue": 44,
   "counts": {
-    "topic_receipt_occurrences": 54,
-    "topic_unique_receipts": 34,
-    "ledger_receipt_occurrences": 40,
-    "ledger_unique_receipts": 40,
-    "covered_topic_receipts": 34,
+    "topic_receipt_occurrences": 55,
+    "topic_unique_receipts": 35,
+    "ledger_receipt_occurrences": 41,
+    "ledger_unique_receipts": 41,
+    "covered_topic_receipts": 35,
     "missing_from_ledger": 0,
     "ledger_only": 6,
     "duplicate_groups": 20,
@@ -329,6 +329,12 @@
       "receipt_id": "chatgpt-37-health-20260901",
       "issue": 37,
       "result": "PARTIAL",
+      "level": "OFFLINE_READY"
+    },
+    {
+      "receipt_id": "chatgpt-issue50-ledger-completeness-20260906",
+      "issue": 50,
+      "result": "PASS",
       "level": "OFFLINE_READY"
     },
     {
