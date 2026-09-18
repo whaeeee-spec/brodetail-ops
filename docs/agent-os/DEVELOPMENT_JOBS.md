@@ -2,7 +2,7 @@
 
 Canonical schema identifier: `brodetail.development-job/v0.1`.
 
-A Development Job is the executable contract between coordinator, router, executor and evaluator. It is semantic: every field constrains decisions and evidence, not just issue formatting. Chat history cannot widen it.
+A Development Job is the executable contract between Coordinator, Task Router, Worker and Development Evaluator. Every field constrains decisions and evidence; chat history cannot widen the accepted scope.
 
 ## Required fields
 
@@ -27,26 +27,43 @@ A Development Job is the executable contract between coordinator, router, execut
 | `EXPECTED_EVIDENCE_LEVEL` | `SUMMARY`, `REPRODUCIBLE`, or `OFFLINE_READY`. |
 | `SAFETY / CONCURRENCY` | Approval gates, sensitive-data rules and concurrent dirty-work constraints. |
 
-Router metadata must also provide executor, area, size/mode/attempt and an explicit path allowlist. If a required semantic field is missing and materially changes execution, report one blocker instead of guessing.
+Router metadata also provides executor, area, size/mode/attempt and an explicit path allowlist. If a missing field would materially change execution, Worker reports one blocker instead of guessing.
 
-## Execution lifecycle
+## Accepted lifecycle
 
-1. Coordinator accepts and routes the job.
-2. Router supplies exact scope, attempt and latest checkpoint.
-3. Executor audits only canonical/allowed inputs and preserves dirty state.
-4. After each meaningful stage, executor persists `DONE / NEXT / BLOCKER`.
-5. Executor implements the smallest compliant change and runs the declared tests.
-6. Executor declares `PROJECT_STATE_CHANGE: NONE|PROPOSED|APPLIED`.
-7. Executor emits exactly one terminal receipt when required.
-8. Dispatcher reconciles GitHub evidence; Development Evaluator recommends `PASS`, `PARTIAL` or `BLOCKED`; coordinator owns status.
+`AGENTS/Job -> optional ExecPlan -> Worker -> Build/Tests/Smoke -> Development Evaluator -> commit/PR/Result Relay -> verified PROJECT_STATE / durable learning`
 
-## Result semantics
+1. Coordinator accepts the job; Router supplies its exact scope, attempt and checkpoint.
+2. Optional ExecPlan decomposes complex work but cannot redefine the job.
+3. Worker audits only allowed canonical inputs, preserves unrelated dirty state and persists `DONE / NEXT / BLOCKER` after meaningful stages.
+4. Worker implements the smallest compliant change and runs the declared build/tests/smoke checks.
+5. Development Evaluator scores and returns its verdict against the accepted contract.
+6. Allowed commit/PR and exactly one terminal Result Relay receipt carry the evaluated evidence; Dispatcher/Coordinator owns GitHub mutation.
+7. Evaluator/Coordinator decides whether verified Project State or durable learning changes.
 
-- `PASS`: all acceptance criteria satisfied; any manual checks are explicitly listed and non-blocking.
-- `PARTIAL`: useful in-scope result exists, but at least one acceptance criterion is not satisfied; state the single primary gap.
-- `BLOCKED`: no safe compliant continuation exists; state at most one real blocker and evidence.
+## Worker result status
 
-Recommended workflow status is separate from result: normally `status:review` after a complete delivery, or `blocked` when continuation requires new authority/input. Executor recommends; dispatcher/coordinator writes.
+Worker/result status describes execution, not acceptance:
+
+- `PASS` — Worker completed the scoped implementation and declared checks.
+- `PARTIAL` — useful in-scope result exists but at least one requested item remains incomplete.
+- `BLOCKED` — no safe compliant continuation exists because of one concrete blocker.
+
+Recommended workflow status is separate: normally `status:review` after complete delivery, or `blocked` when new authority/input is required. Worker recommends; Dispatcher/Coordinator writes.
+
+## Development Evaluator verdict
+
+Evaluator verdict is a separate vocabulary and never substitutes for worker/result status:
+
+- `PASS`
+- `PASS_WITH_NOTES`
+- `FAIL`
+
+The evaluator also provides score `0-100`; hard safety failures override score. On `FAIL`, it must return an exact rework list.
+
+## PROJECT_STATE_CHANGE decision
+
+`PROJECT_STATE_CHANGE` is an Evaluator/Coordinator decision with exactly one value: `YES` or `NO`. It is not a worker result and not a workflow status. A worker may submit evidence or a recommendation, but worker assertion alone never verifies Project State.
 
 ## Evidence levels
 

@@ -4,83 +4,93 @@
 
 - Last verified: `2026-09-10` (Europe/Moscow)
 - Canonical path: `E:\BRODETAIL\brodetail-ops\PROJECT_STATE.md`
-- Canonical writer: coordinator/evaluator; executor may update only when the Development Job explicitly allows it
+- Canonical writer: Evaluator/Coordinator; scoped worker may edit only when the Development Job explicitly allows it
 - Overall status: `IN_PROGRESS`
 
-## Status vocabulary
+## OPERATIONAL STATUS VOCABULARY
 
-- `VERIFIED` — подтверждено текущим каноническим источником или воспроизводимым evidence.
-- `IN_PROGRESS` — есть активный принятый Development Job; результат ещё не принят evaluator.
-- `BLOCKED` — продолжение невозможно из-за одного конкретного внешнего blocker.
-- `UNKNOWN` — состояние не проверялось в разрешённой области; это не ошибка и не предположение.
-- `STALE` — ранее подтверждённый факт мог измениться и требует повторной проверки.
+`READY | PARTIAL | BLOCKED | DEGRADED | IN_PROGRESS | LEGACY | UNKNOWN`
 
-Только эти слова описывают фактическое состояние компонентов. GitHub workflow labels (`status:review`, `status:done` и другие) остаются отдельным словарём очереди задач.
+- `READY` — актуальная готовность подтверждена разрешённым каноническим evidence.
+- `PARTIAL` — подтверждена только часть контура или требуемых возможностей.
+- `BLOCKED` — продолжение невозможно из-за одного конкретного blocker.
+- `DEGRADED` — контур работает с подтверждённым ухудшением.
+- `IN_PROGRESS` — есть активный Development Job, результат ещё не принят Evaluator/Coordinator.
+- `LEGACY` — контур сохранён только как устаревший и не считается текущим целевым решением.
+- `UNKNOWN` — актуальное состояние не проверено в разрешённой области.
 
-## Current objective
+Другие слова не используются как operational status. GitHub workflow labels и Development Evaluator verdicts имеют отдельные словари.
 
-Собрать Agent OS documentation foundation, чтобы новая сессия восстанавливала scope, канонические источники, активную работу и evidence без истории чата.
+## SYSTEM STATUS
 
-## Verified current state
-
-| Area | Status | Verified fact |
+| System contour | Status | Verified evidence / limit |
 | --- | --- | --- |
-| Control plane | `VERIFIED` | Local checkout `E:\BRODETAIL\brodetail-ops` is the working copy of `whaeeee-spec/brodetail-ops`; GitHub issues are the task queue. |
-| Task Router / Result Relay | `VERIFIED` | Issue #61 was launched by the existing router and checkpoint writer is reachable. Result Ledger remains issue `#43`. |
-| Agent OS documentation | `IN_PROGRESS` | DJ-AOS-001-R1 / issue #61 materializes the accepted documentation-only foundation and awaits evaluator review. |
-| Public website source pointer | `VERIFIED` | Root instructions point production source to `E:\BRODETAIL\.worktrees\issue-42-glass-restoration-v2` until explicit reconciliation. No deploy is part of issue #61. |
-| Yan / autopilot runtime | `UNKNOWN` | Runtime, provider, prompt, channel and customer conversations were intentionally not inspected by issue #61. |
-| Sales Intelligence runtime/data | `UNKNOWN` | Runtime and operational datasets were intentionally not inspected by issue #61. |
-| CRM gap migration runtime/data | `UNKNOWN` | Schema, records and migrations were intentionally not inspected by issue #61. |
+| Public Site | `PARTIAL` | Канонический pointer задан через `E:\BRODETAIL\CANONICAL_SITE_SOURCE.txt` и разрешается в `E:\BRODETAIL\site-production-canonical`; product build, deploy и production smoke в issue #62 не проверялись. |
+| CRM Core | `UNKNOWN` | Runtime, API, schema и operational data не входят в scope issue #62 и не проверялись. |
+| Yan LIVE | `UNKNOWN` | Runtime, provider, prompt, channel и raw conversations не проверялись. |
+| Sales Intelligence / `CHAT_OUTCOME` | `UNKNOWN` | Pipeline, transformation artifacts и source snapshot не проверялись. |
+| CRM reconciliation | `UNKNOWN` | Migration/backfill tooling, schema и records не проверялись. |
+| Development Jobs / Task Router | `IN_PROGRESS` | Issue #62 / `DJ-AOS-001-R2` выполняет документационный rework принятого Agent OS contract. |
+| Result Relay | `PARTIAL` | Существующий relay и единственный Result Ledger issue #43 заданы контрактом; терминальный receipt issue #62 ещё не принят. |
+| BRODETAIL TV | `UNKNOWN` | Source, runtime и текущая работоспособность не проверялись. |
+| Integrations / infrastructure | `UNKNOWN` | DNS, Caddy, providers, webhooks и production infrastructure не проверялись. |
 
-## Active Development Jobs
+## ACTIVE DEVELOPMENT JOBS
 
-- Issue `#61`, `DJ-AOS-001-R1`: `IN_PROGRESS`; documentation-only continuation of accepted issue #58 outcome. Next gate: manual Development Evaluator review, then dispatcher-owned status transition.
-- Issue `#58`, `DJ-AOS-001`: `BLOCKED` historical attempt; made zero project changes because inferred scope/local checkout were unavailable. Issue #61 is its repaired continuation.
+- Issue `#62`, `DJ-AOS-001-R2`: `IN_PROGRESS`; documentation-only rework после manual evaluator failure issue #61. Следующий gate: детерминированные проверки, terminal Result Relay receipt и manual coordinator evaluation.
 
-Do not treat this list as the live issue queue. At bootstrap, reconcile it against the router-provided active job/GitHub issues, then update only verified deltas.
+Этот раздел — проверенный handoff, а не live-замена GitHub queue. В новой сессии активный job определяется из Task Router/GitHub issue.
 
-## Blockers
+## LAST VERIFIED ENGINEERING RESULT
 
-- No current blocker is verified for issue #61.
+- Issue `#61`, `DJ-AOS-001-R1`: worker создал локальный control-plane commit `95beffd93e2e44af6c7e2ea204f0e8dc76e078c2`, но manual coordinator evaluation вернул `FAIL` из-за расхождения canonical contracts и устаревшего public-site pointer.
+- Это не production PASS: product build, deploy, production smoke, runtime и data не проверялись.
 
-## Approval gates and risks
+## CURRENT BLOCKERS
 
-- Owner approval is required for production deploys, DNS/Caddy changes, destructive migrations, customer-data writes and outbound VK/Avito sends.
-- Issue #61 production risk: `NONE`; data risk: `NONE`.
-- Dirty files outside the job allowlist are concurrent work: do not stage, reset, clean or modify them.
+- Подтверждённых blocker для выполнения issue #62 нет.
 
-## Canonical pointers
+## CURRENT RISKS
 
+- В canonical site repository есть параллельный dirty product state, включая `/flyer`, CRM/BroWheel и CSS/assets; issue #62 не должен его менять, stage, reset или clean.
+- Control-plane документы не считаются принятыми до manual Development Evaluator verdict.
+- Production deploy, DNS/Caddy changes, destructive migrations, customer-data writes и outbound VK/Avito sends требуют отдельного owner approval.
+
+## CANONICAL POINTERS
+
+- Project State: `E:\BRODETAIL\brodetail-ops\PROJECT_STATE.md`
+- Public Site pointer: `E:\BRODETAIL\CANONICAL_SITE_SOURCE.txt`
+- Public Site current repository: `E:\BRODETAIL\site-production-canonical`
 - System topology: `docs/architecture/SYSTEM_MAP.md`
-- Writer/source ownership: `docs/architecture/SOURCES_OF_TRUTH.md` and ADR-001
+- Writer/source ownership: `docs/architecture/SOURCES_OF_TRUTH.md` и ADR-001
 - Development Job contract: `docs/agent-os/DEVELOPMENT_JOBS.md`
-- Optional execution plans: `docs/agent-os/EXECPLANS.md`
-- Engineering delivery evaluation: `docs/agent-os/EVALUATOR.md`
-- State update rules: `docs/agent-os/PROJECT_STATE_POLICY.md`
+- Optional ExecPlan contract: `docs/agent-os/EXECPLANS.md`
+- Development Evaluator: `docs/agent-os/EVALUATOR.md`
+- Project State update policy: `docs/agent-os/PROJECT_STATE_POLICY.md`
 - Result Ledger: GitHub issue `#43`
 
-## Next actions
+## RECENTLY COMPLETED
 
-1. Finish deterministic issue #61 documentation checks without product build or production smoke.
-2. Create one dedicated `brodetail-ops` documentation commit if the allowlist diff remains clean.
-3. Emit one terminal receipt; dispatcher/coordinator performs GitHub reconciliation and evaluator review.
+- Issue #61 materialized the initial Agent OS documentation foundation in local commit `95beffd93e2e44af6c7e2ea204f0e8dc76e078c2`; its evaluator verdict was `FAIL`, so issue #62 performs only the exact contract rework.
+- Historical issue #58 attempt made no project changes and is not an active implementation source.
 
-## Session handoff
+## NEXT BEST ACTION
 
-Issue #61 began from clean `brodetail-ops` HEAD `9d1473b3b3b1297e8156e6a5d4019c05f169ad84`. Product/runtime/data/deploy paths are out of scope. A separate site checkout contains concurrent dirty product work; only its new component `AGENTS.md` belongs to this job. The executor must end with exact changed files, control-plane commit SHA, checks, rollback, `PROJECT_STATE_CHANGE`, blocker and recommended `status:review`.
+Complete the issue #62 documentation-only corrections, run the declared allowlist/string/section/lifecycle checks, emit one terminal receipt, then send the result to manual coordinator evaluation. Do not deploy or modify product/runtime/data.
 
-## New-session bootstrap — 8 steps
+## NEW-SESSION BOOTSTRAP — EXACTLY 8 STEPS
 
-1. Read `E:\BRODETAIL\AGENTS.md`.
-2. Read this `PROJECT_STATE.md` and note `Last verified`.
-3. Load the active Development Job and latest Task Router checkpoint.
-4. Read the nearest component `AGENTS.md` for every allowed target.
-5. Read `SYSTEM_MAP.md` and `SOURCES_OF_TRUTH.md`.
-6. Read only job-relevant ADR/contracts/README files allowed by scope.
-7. Verify scoped Git status, source pointers and approval gates; preserve unrelated dirty work.
-8. Continue from checkpoint and finish with tests, `PROJECT_STATE_CHANGE` and exactly one terminal Result Relay receipt.
+1. Determine the current workspace and its control plane.
+2. Read the root `E:\BRODETAIL\AGENTS.md`.
+3. Read canonical `brodetail-ops/PROJECT_STATE.md` and its `Last verified` date.
+4. Identify active Development Jobs and the latest Task Router/GitHub checkpoint.
+5. Read relevant component `AGENTS.md` files for allowed paths.
+6. Read relevant ADR and `brodetail-ops/docs/architecture/SOURCES_OF_TRUTH.md`.
+7. Verify the latest Result Relay records when a state claim needs confirmation.
+8. Output `CURRENT STATE / ACTIVE JOBS / BLOCKERS / LAST VERIFIED RESULT / NEXT BEST ACTION`.
 
-## PROJECT_STATE_CHANGE handoff
+Previous chat is non-authoritative. When it conflicts with canonical state, canonical state wins.
 
-Every terminal job result declares exactly one of: `PROJECT_STATE_CHANGE: NONE`, `PROPOSED` or `APPLIED`, with a one-line reason and evidence pointer. Never rewrite this file from assumptions, raw chat history or derived analytics.
+## PROJECT_STATE_CHANGE
+
+`PROJECT_STATE_CHANGE: YES | NO` is decided only by the Development Evaluator/Coordinator. Worker evidence or assertion alone never verifies Project State.
