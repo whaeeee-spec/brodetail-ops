@@ -57,6 +57,7 @@ Open planning/review issues are not listed here as active execution jobs.
 ## CANONICAL POINTERS
 
 - Project State: `brodetail-ops/PROJECT_STATE.md`
+- Finalization / cleanup index: `brodetail-ops/FINALIZATION_INDEX.md`
 - Public Site pointer: `E:\BRODETAIL\CANONICAL_SITE_SOURCE.txt`
 - Public Site current repository: `E:\BRODETAIL\site-production-canonical`
 - System topology: `docs/architecture/SYSTEM_MAP.md`
@@ -88,7 +89,7 @@ Open planning/review issues are not listed here as active execution jobs.
 1. Determine the current workspace and its control plane.
 2. Read the root `E:\BRODETAIL\AGENTS.md`.
 3. Read canonical `brodetail-ops/PROJECT_STATE.md` and its `Last verified` date.
-4. Identify active Development Jobs and the latest Task Router/GitHub checkpoint.
+4. Read `brodetail-ops/FINALIZATION_INDEX.md`, then identify active Development Jobs and the latest Task Router/GitHub checkpoint.
 5. Read relevant component `AGENTS.md` files for allowed paths.
 6. Read relevant ADR and `brodetail-ops/docs/architecture/SOURCES_OF_TRUTH.md`.
 7. Verify the latest Result Relay records when a state claim needs confirmation.
