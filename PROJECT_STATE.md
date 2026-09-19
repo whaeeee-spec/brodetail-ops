@@ -46,6 +46,7 @@ Open planning/review issues are not listed here as active execution jobs.
 - Issue #71, website lead notifications to internal VK chat: blocked on secure server-side VK community authorization plus verified destination peer/conversation configuration. Private invite/auth material must not be stored in GitHub.
 - No verified blocker for the Agent OS/control-plane foundation.
 - Issue #63 QR flyer ROI specification is now in `status:review`; implementation still requires a fresh scope check and a separate implementation/release job.
+- #73 BRODETAIL Brain and #74 Brodi TV wake-word are newly created scopes; they are not yet production-complete.
 
 ## CURRENT RISKS
 
@@ -80,9 +81,9 @@ Open planning/review issues are not listed here as active execution jobs.
 
 ## NEXT BEST ACTION
 
-1. Execute #70 only within its isolated public-information/site scope and its existing release/measurement gates.
-2. Review #63 and split its already-prepared QR flyer ROI specification into a non-overlapping implementation job when desired.
-3. Keep #71 blocked until secure VK community auth and destination configuration are available; then run a synthetic owner-safe canary before any production notification release.
+1. Build #73 BRODETAIL Brain v0.1 as the shared READ-ONLY context layer for Control Room + Brodi, reusing canonical CRM, Project State, Result Ledger and Sales Intelligence rather than creating another source of truth.
+2. Integrate #74 into the existing BRODETAIL TV only after the Brain query boundary is usable: local wake word `Броди`, short voice session, text + TTS overlay, no ambient cloud audio persistence.
+3. Continue #70/#53/#63/#71 only through their existing isolated gates; do not let those older threads become dependencies for Control Room or Brain.
 
 ## NEW-SESSION BOOTSTRAP — EXACTLY 8 STEPS
 
