@@ -1,6 +1,6 @@
 # BRODETAIL Finalization Index
 
-Last verified: 2026-09-19 (Europe/Moscow)
+Last verified: 2026-09-20 (Europe/Moscow)
 
 Purpose: one cleanup/control-room index for old BRODETAIL chats. Old chat text is non-authoritative after its verified knowledge has been promoted into canonical sources.
 
@@ -23,7 +23,7 @@ Topic-specific open work lives in its current GitHub issue.
 | Sales Intelligence / Yan Evaluator / Sales Memory | PASS | `PROJECT_STATE.md` + Result Ledger #43; #68/#69 receipts promoted | Wait for CRM-verified outcomes; Sales Memory needs sufficient outcome-supported examples before promotion | YES |
 | Ads Operating System / commercial rollout | FINALIZATION PASS | Issue #53 | #53 stays open. Current target 714358378; fresh Yandex/VK cabinet/auth preflight, Metrika/CRM attribution proof and 15 real VK assets remain. Activation stays fail-closed / ACTIVE=0 until accepted | YES |
 | Site rollout / homepage regression / glass-era site history | FINALIZED / historical complete | Issue #55 + Result Ledger #43 + current site pointer + #52/#67 evidence | No old-thread work remains. Future site work must use `CANONICAL_SITE_SOURCE.txt -> site-production-canonical` | YES |
-| Flyer / Agent OS / VK notification history | PASS | `PROJECT_STATE.md` + Result Ledger #43 + #63 + #71 | #63 is review/spec only; #71 is blocked on secure VK auth/destination; #70 remains separate | YES |
+| Flyer / Agent OS / VK notification history | PASS | `PROJECT_STATE.md` + Result Ledger #43 + closed #63 + #71 + #76 | #63 spec is complete/closed; implementation is #76; #71 remains blocked on secure VK auth/destination; #70 remains separate | YES |
 | General project-state cleanup / control-plane consolidation | PASS | `PROJECT_STATE.md` + Result Ledger #43 | Current work is represented by current issues; previous chat is non-authoritative | YES |
 | BRODETAIL Voice / Brodi browser pilot | COMPLETED | Issue #66 + `PROJECT_STATE.md` | Browser voice pilot complete; PBX/customer calls remain off. Brain/TV expansion is now #73/#74 | YES for the completed #66 implementation thread |
 
@@ -51,13 +51,16 @@ Do **not** delete yet unless that exact chat itself has an explicit FINALIZATION
 
 ## Current open work after cleanup
 
-- #72 — Yan website + ChatGPT read-only runtime verification: OPEN / inbox.
-- #73 — BRODETAIL Brain v0.1: OPEN / inbox. Unified read-only business context for Control Room + Brodi.
-- #74 — Brodi TV wake word + Brain overlay: OPEN / inbox.
-- #70 — AI Visibility intervention v0.1: OPEN. Controlled Gemini + tinting + model/problem intervention and same-40 remeasurement.
-- #53 — Ads: OPEN/BLOCKED on cabinet/auth/assets acceptance; old chat is no longer needed because #53 contains the promoted current state.
-- #63 — QR flyer ROI: OPEN / status:review; specification is frozen for later implementation.
-- #71 — Website lead notifications -> VK internal chat: OPEN / status:blocked pending secure VK community auth + destination.
+- #53 — Ads: BLOCKED on fresh Yandex/VK cabinet/auth/assets acceptance; package remains ACTIVE=0.
+- #70 — AI Visibility intervention: existing commit `3583c447...` ready; canonical deploy + same-40 remeasurement remain.
+- #71 — VK internal lead notifications: BLOCKED on secure community auth + destination.
+- #72 — Yan runtime verification: BLOCKED until authorized local read-only runtime path is available.
+- #73 — BRODETAIL Brain v0.1: IN PROGRESS; live CRM works, private-GitHub control refresh remains.
+- #74 — Brodi TV wake word: REVIEW; real physical owner wake not yet accepted.
+- #75 — BroWheel/Cabinet canonical writer production completion; successor to closed #32/#45/#51 history.
+- #76 — QR flyer attribution + CRM ROI implementation; successor to closed specification #63.
+- #77 — Sales OS isolated SaaS engineering bootstrap; successor to closed product-definition #64.
+- Result Ledger #43 remains a permanent feed, not an active task.
 - `PROJECT_STATE.md` remains the bootstrap source for any new Control Room session.
 
 ## Cleanup decision
