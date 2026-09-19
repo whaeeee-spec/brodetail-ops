@@ -2,86 +2,94 @@
 
 `schema: brodetail.project-state/v0.1`
 
-- Last verified: `2026-09-10` (Europe/Moscow)
-- Canonical path: `E:\BRODETAIL\brodetail-ops\PROJECT_STATE.md`
-- Canonical writer: Evaluator/Coordinator; scoped worker may edit only when the Development Job explicitly allows it
+- Last verified: `2026-09-19` (Europe/Moscow)
+- Canonical path: `E:\\BRODETAIL\\brodetail-ops\\PROJECT_STATE.md`
+- Canonical writer: Evaluator/Coordinator
 - Overall status: `IN_PROGRESS`
 
 ## OPERATIONAL STATUS VOCABULARY
 
 `READY | PARTIAL | BLOCKED | DEGRADED | IN_PROGRESS | LEGACY | UNKNOWN`
 
-- `READY` — актуальная готовность подтверждена разрешённым каноническим evidence.
-- `PARTIAL` — подтверждена только часть контура или требуемых возможностей.
-- `BLOCKED` — продолжение невозможно из-за одного конкретного blocker.
-- `DEGRADED` — контур работает с подтверждённым ухудшением.
-- `IN_PROGRESS` — есть активный Development Job, результат ещё не принят Evaluator/Coordinator.
-- `LEGACY` — контур сохранён только как устаревший и не считается текущим целевым решением.
-- `UNKNOWN` — актуальное состояние не проверено в разрешённой области.
-
-Другие слова не используются как operational status. GitHub workflow labels и Development Evaluator verdicts имеют отдельные словари.
-
 ## SYSTEM STATUS
 
 | System contour | Status | Verified evidence / limit |
 | --- | --- | --- |
-| Public Site | `PARTIAL` | Канонический pointer задан через `E:\BRODETAIL\CANONICAL_SITE_SOURCE.txt` и разрешается в `E:\BRODETAIL\site-production-canonical`; product build, deploy и production smoke в issue #62 не проверялись. |
-| CRM Core | `UNKNOWN` | Runtime, API, schema и operational data не входят в scope issue #62 и не проверялись. |
-| Yan LIVE | `UNKNOWN` | Runtime, provider, prompt, channel и raw conversations не проверялись. |
-| Sales Intelligence / `CHAT_OUTCOME` | `UNKNOWN` | Pipeline, transformation artifacts и source snapshot не проверялись. |
-| CRM reconciliation | `UNKNOWN` | Migration/backfill tooling, schema и records не проверялись. |
-| Development Jobs / Task Router | `IN_PROGRESS` | Issue #62 / `DJ-AOS-001-R2` выполняет документационный rework принятого Agent OS contract. |
-| Result Relay | `PARTIAL` | Существующий relay и единственный Result Ledger issue #43 заданы контрактом; терминальный receipt issue #62 ещё не принят. |
-| BRODETAIL TV | `UNKNOWN` | Source, runtime и текущая работоспособность не проверялись. |
-| Integrations / infrastructure | `UNKNOWN` | DNS, Caddy, providers, webhooks и production infrastructure не проверялись. |
+| Public Site | `READY` | Issue #52 is closed `status:done`; production website/service rollout was revalidated 2026-09-19. Historical Safari/zstd compatibility hotfix is already part of production history. |
+| CRM Core | `READY` | Issue #56 production backfill/cutover completed: PostgreSQL is canonical operational target, relation integrity PASS, idempotency reruns planned zero new inserts, legacy D1 retained only as frozen historical backup/read source. |
+| Canonical inbound Website/VK/Avito | `READY` | Issue #57 closed `status:done`; Website/VK/Avito canonical PostgreSQL intake revalidated after #56, source attribution/idempotency PASS. Outbound SEND remains OFF. |
+| Yan LIVE | `PARTIAL` | Deterministic CRM intake does not depend on Yan/OpenAI. AI worker and customer SEND remain OFF in the latest verified CRM runtime evidence. |
+| Sales Intelligence / CHAT_OUTCOME | `READY` | Issue #46 closed `status:done`; fresh redacted CRM export/preflight/materialization PASS, 2,755 conversation outputs deterministic. Historical archive cannot truthfully receive commercial outcomes from currently available identifiers; zero-linkage outcomes remain null/INSUFFICIENT_LINKAGE. |
+| CRM reconciliation | `READY` | Issue #56 completed production backfill/cutover; #47 offline readiness is closed and consumed by #56/#57. |
+| Development Jobs / Task Router | `READY` | Issue #59 Windows state-write/Result Relay repair remains healthy; issue #62 Agent OS contract rework is closed `status:done`. |
+| Result Relay | `PARTIAL` | Single canonical Result Ledger remains issue #43; completeness/guard work #50 and Windows relay repair #59 are done. Post-2026-09-16 ledger completeness has not been independently revalidated in this promotion pass, so do not infer every newer topic receipt is mirrored without checking #43. |
+| BRO DETAIL TV | `READY` | Issue #33 closed `status:done`; terminal production receipt `issue33-tv-production-20260919`: canonical /tv route PASS, healthy container, canonical PostgreSQL read-only data path, restart/outage smoke PASS, no Cloudflare/D1 runtime dependency, CRM writes=0. |
+| Brodi Voice browser pilot | `READY` | Issue #66 closed `status:done`; Yandex STT -> YandexGPT -> TTS browser pilot 12/12 PASS with physical Chrome microphone. CRM context read-only, raw audio persistence off. Production PBX/customer calling remains intentionally OFF. |
+| Integrations / infrastructure | `PARTIAL` | Website/VK/Avito inbound and TV production paths are verified. Outbound VK/Avito SEND and PBX calling remain OFF by design. |
 
-## ACTIVE DEVELOPMENT JOBS
+## ACTIVE / OPEN DEVELOPMENT JOBS
 
-- Issue `#62`, `DJ-AOS-001-R2`: `IN_PROGRESS`; documentation-only rework после manual evaluator failure issue #61. Следующий gate: детерминированные проверки, terminal Result Relay receipt и manual coordinator evaluation.
+- Issue #45 — BroWheel + Cabinet Node/VPS compatibility integration: open, `status:review`; last GitHub update 2026-09-04. Revalidate before any deployment or closure because its issue state is old relative to current platform work.
+- Issue #63 — QR flyer attribution + CRM ROI measurement: open, `status:blocked`; planning contract frozen at v1.0 and implementation remains gated until overlapping /flyer/CRM scopes are clear and current canonical intake shape is re-audited.
+- Issue #64 — BRODETAIL Sales OS: open, `status:review`; product/architecture specification is advanced, but isolated SaaS engineering must remain separate from BRODETAIL production and requires explicit repository/bootstrap gate before coding.
 
-Этот раздел — проверенный handoff, а не live-замена GitHub queue. В новой сессии активный job определяется из Task Router/GitHub issue.
+## LAST VERIFIED ENGINEERING RESULTS
 
-## LAST VERIFIED ENGINEERING RESULT
-
-- Issue `#61`, `DJ-AOS-001-R1`: worker создал локальный control-plane commit `95beffd93e2e44af6c7e2ea204f0e8dc76e078c2`, но manual coordinator evaluation вернул `FAIL` из-за расхождения canonical contracts и устаревшего public-site pointer.
-- Это не production PASS: product build, deploy, production smoke, runtime и data не проверялись.
+- #33 BRO DETAIL TV: `TV_PRODUCTION_PASS`.
+- #46 CHAT_OUTCOME: fresh redacted CRM contract/materialization PASS; 2,755 outputs deterministic.
+- #47 CRM/VK/Avito readiness: closed; downstream production work completed by #56/#57.
+- #48 Glass rollout readiness: closed `status:done`; clean non-production acceptance PASS. Do not reinterpret readiness receipts as authorization for a new production rollout.
+- #52 Public site + CRM catalog rollout: closed `status:done`; production outcome revalidated.
+- #56 CRM production backfill/cutover: closed `status:done`; PostgreSQL canonicalization completed.
+- #57 canonical inbound activation: closed `status:done`; Website/VK/Avito intake PASS, SEND OFF.
+- #59 Task Router state-write repair: closed `status:done`; revalidation PASS.
+- #66 Brodi Voice: closed `status:done`; browser voice pilot PASS, PBX/customer calls OFF.
 
 ## CURRENT BLOCKERS
 
-- Подтверждённых blocker для выполнения issue #62 нет.
+- #45 needs current revalidation because its open/review state predates the completed September platform changes.
+- #63 implementation is intentionally blocked by concurrency/current-shape gates; no second CRM writer/store may be introduced.
+- #64 engineering/bootstrap is not implicitly authorized by product-spec maturity; it must start in an isolated SaaS repository/project after explicit gate approval.
 
 ## CURRENT RISKS
 
-- В canonical site repository есть параллельный dirty product state, включая `/flyer`, CRM/BroWheel и CSS/assets; issue #62 не должен его менять, stage, reset или clean.
-- Control-plane документы не считаются принятыми до manual Development Evaluator verdict.
-- Production deploy, DNS/Caddy changes, destructive migrations, customer-data writes и outbound VK/Avito sends требуют отдельного owner approval.
+- Old chat summaries and historical issue comments may describe blockers that are now resolved. Prefer newer terminal receipts and current issue state.
+- D1/Chatium/Sites operational-writer designs are historical/legacy where they conflict with the canonical PostgreSQL writer boundary.
+- Do not turn readiness/canary packages into production writes without the approval/gates stated by the current issue.
+- Outbound VK/Avito SEND and PBX customer calling remain OFF unless separately approved and verified.
 
 ## CANONICAL POINTERS
 
-- Project State: `E:\BRODETAIL\brodetail-ops\PROJECT_STATE.md`
-- Public Site pointer: `E:\BRODETAIL\CANONICAL_SITE_SOURCE.txt`
-- Public Site current repository: `E:\BRODETAIL\site-production-canonical`
+- Project State: `E:\\BRODETAIL\\brodetail-ops\\PROJECT_STATE.md`
+- Public Site pointer: `E:\\BRODETAIL\\CANONICAL_SITE_SOURCE.txt`
+- Public Site repository: `E:\\BRODETAIL\\site-production-canonical`
 - System topology: `docs/architecture/SYSTEM_MAP.md`
-- Writer/source ownership: `docs/architecture/SOURCES_OF_TRUTH.md` и ADR-001
-- Development Job contract: `docs/agent-os/DEVELOPMENT_JOBS.md`
-- Optional ExecPlan contract: `docs/agent-os/EXECPLANS.md`
+- Writer/source ownership: `docs/architecture/SOURCES_OF_TRUTH.md` and ADR-001
+- Development Jobs: `docs/agent-os/DEVELOPMENT_JOBS.md`
 - Development Evaluator: `docs/agent-os/EVALUATOR.md`
-- Project State update policy: `docs/agent-os/PROJECT_STATE_POLICY.md`
-- Result Ledger: GitHub issue `#43`
+- Project State policy: `docs/agent-os/PROJECT_STATE_POLICY.md`
+- Result Ledger: GitHub issue #43
 
-## RECENTLY COMPLETED
+## RECENTLY COMPLETED / SUPERSEDED HISTORY
 
-- Issue #61 materialized the initial Agent OS documentation foundation in local commit `95beffd93e2e44af6c7e2ea204f0e8dc76e078c2`; its evaluator verdict was `FAIL`, so issue #62 performs only the exact contract rework.
-- Historical issue #58 attempt made no project changes and is not an active implementation source.
+- The old TV blocker “canonical CRM read projection/SSH unavailable” is STALE: #33 now has production PASS and is closed.
+- The old CHAT_OUTCOME blocker “fresh redacted CRM export missing” is STALE: #46 revalidation on 2026-09-19 removed it. Historical commercial linkage remains unavailable because deterministic identifiers do not overlap.
+- The old CRM canonicalization/open-conflict narrative is STALE: #56 production backfill/cutover is complete; explicit historical exclusions were handled without fabrication.
+- The old Website/VK/Avito “offline readiness only” state is STALE: #57 production canonical intake is active and revalidated, while SEND remains OFF.
+- The old Agent OS/Task Router in-progress state in this file is STALE: #59 and #62 are closed done.
+- Voice/Brodi was previously deferred from TV; #66 is now closed with browser-pilot PASS. PBX/customer calling remains a separate disabled capability.
 
 ## NEXT BEST ACTION
 
-Complete the issue #62 documentation-only corrections, run the declared allowlist/string/section/lifecycle checks, emit one terminal receipt, then send the result to manual coordinator evaluation. Do not deploy or modify product/runtime/data.
+1. Revalidate open #45 against current canonical site/CRM/runtime; either close it with terminal evidence or define the smallest remaining deploy/smoke.
+2. Keep #63 blocked until its v1.0 handoff gates are actually clear; then implement only on the canonical intake/finance relations with deterministic attribution/idempotency tests.
+3. Treat #64 as a separate SaaS product: open isolated repository/bootstrap only after explicit approval and without copying BRODETAIL production data/secrets/raw chats.
+4. Before reporting a new Work/Codex result, verify topic receipt plus canonical Result Ledger #43; do not revive stale blockers from old chats.
 
 ## NEW-SESSION BOOTSTRAP — EXACTLY 8 STEPS
 
 1. Determine the current workspace and its control plane.
-2. Read the root `E:\BRODETAIL\AGENTS.md`.
+2. Read the root `E:\\BRODETAIL\\AGENTS.md`.
 3. Read canonical `brodetail-ops/PROJECT_STATE.md` and its `Last verified` date.
 4. Identify active Development Jobs and the latest Task Router/GitHub checkpoint.
 5. Read relevant component `AGENTS.md` files for allowed paths.
@@ -93,4 +101,4 @@ Previous chat is non-authoritative. When it conflicts with canonical state, cano
 
 ## PROJECT_STATE_CHANGE
 
-`PROJECT_STATE_CHANGE: YES | NO` is decided only by the Development Evaluator/Coordinator. Worker evidence or assertion alone never verifies Project State.
+`PROJECT_STATE_CHANGE: YES` — 2026-09-19 knowledge-promotion pass replaced stale 2026-09-10 state with newer verified issue/terminal evidence. No production/runtime/data changes were made by this documentation update.
