@@ -24,29 +24,32 @@ Other words are not operational statuses. GitHub workflow labels, worker result 
 | CRM reconciliation | `UNKNOWN` | Issue #56 is closed, but production reconciliation/backfill evidence was not re-audited deeply enough here to claim a current operational status. |
 | Development Jobs / Task Router | `READY` | Agent OS contract rework #62 was manually evaluated PASS 100/100 and published at commit `fd1e3fe`; reliability fixes #59 and #60 are closed `status:done`. Fresh GitHub search found no `status:ready` or `status:in-progress` job. |
 | Result Relay | `PARTIAL` | Canonical Result Ledger issue #43 is active and received recent receipts through 2026-09-19; #59/#60 fixed Windows state-write and terminal-result semantics. Parent issue #36 remains in review, so do not overstate the whole relay program as complete. |
-| BRODETAIL TV | `READY` | Issue #67 records the canonical production route `https://бродетаил.рф/tv/` as live and healthy on 2026-09-19. |
+| BRODETAIL TV | `READY` | Canonical route `https://бродетаил.рф/tv/` is live. Production image `brodetail-tv:20260919-091214` includes BRODETAIL Brain queries plus self-hosted local Vosk RU wake/STT. Synthetic browser wake/no-wake and reload smokes PASS; physical owner wake on the actual studio TV microphone remains review evidence, not yet witnessed. |
 | Integrations / infrastructure | `UNKNOWN` | No comprehensive current DNS/Caddy/provider/webhook audit was performed in this finalization. |
 
 ## ACTIVE DEVELOPMENT JOBS
 
-No Task Router job with `status:ready` or `status:in-progress` was found in the fresh GitHub control-plane search during this finalization.
+- #73 — BRODETAIL Brain v0.1: `status:in-progress`. Live canonical CRM context is deployed; private GitHub/Project State context currently uses a sanitized derived cache and still needs autonomous safe refresh without moving GitHub credentials to the VPS.
+- #74 — Brodi TV wake word: `status:review`. Production wake/STT/Brain/TTS contour is deployed and automated tests pass; one physical studio-TV owner wake utterance remains for acceptance.
 
-Open planning/review issues are not listed here as active execution jobs.
+Other open planning/review issues remain governed by their own GitHub status.
 
 ## LAST VERIFIED ENGINEERING RESULT
 
-- Issue #62 / `DJ-AOS-001-R2`: manual Development Evaluator `PASS 100/100`.
-- Corrected Agent OS/control-plane documentation was fast-forward published at commit `fd1e3fe`.
-- Evidence: exact status/verdict vocabularies, eight-step bootstrap, stale-pointer removal, docs-only allowlist and `git diff --check` all passed.
+- #74 Brodi TV wake-word checkpoint: worker result `PARTIAL`, production image `brodetail-tv:20260919-091214`.
+- Evidence: `npm test` 11/11 PASS; synthetic Chrome wake E2E PASS; no-wake privacy control PASS (`wakeCount=0`, Brain requests=0); browser reload recovery PASS; production rollback-deploy and Brain smoke PASS.
+- Ambient audio stays in the browser before wake; Vosk RU is self-hosted; only locally transcribed question text is sent to `/api/brodi/query`.
+- CRM writes=0, customer calls=0, outbound SEND=0, audio persistence=0.
+- Receipt: `work-brodi-tv-wake-20260919-01`.
 - `PROJECT_STATE_CHANGE: YES`.
-- This result made no product/runtime/data/deploy/DNS/SEND/ads changes.
 
 ## CURRENT BLOCKERS
 
 - Issue #71, website lead notifications to internal VK chat: blocked on secure server-side VK community authorization plus verified destination peer/conversation configuration. Private invite/auth material must not be stored in GitHub.
 - No verified blocker for the Agent OS/control-plane foundation.
 - Issue #63 QR flyer ROI specification is now in `status:review`; implementation still requires a fresh scope check and a separate implementation/release job.
-- #73 BRODETAIL Brain and #74 Brodi TV wake-word are newly created scopes; they are not yet production-complete.
+- #73 Brain blocker: Control Room/GitHub project context is a sanitized derived cache, not yet autonomously refreshed from the private GitHub control plane. Live CRM facts are already queried at request time.
+- #74 acceptance blocker: actual studio TV browser has not yet been witnessed hearing Nikita say `Броди`; the physical profile may require one-time microphone permission. Synthetic browser-media and prior physical microphone availability evidence pass.
 
 ## CURRENT RISKS
 
@@ -70,6 +73,8 @@ Open planning/review issues are not listed here as active execution jobs.
 - Result Ledger: GitHub issue #43
 - QR flyer ROI contract: GitHub issue #63
 - VK internal lead notifications: GitHub issue #71
+- BRODETAIL Brain: GitHub issue #73
+- Brodi TV wake-word: GitHub issue #74
 
 ## RECENTLY COMPLETED
 
@@ -81,9 +86,9 @@ Open planning/review issues are not listed here as active execution jobs.
 
 ## NEXT BEST ACTION
 
-1. Build #73 BRODETAIL Brain v0.1 as the shared READ-ONLY context layer for Control Room + Brodi, reusing canonical CRM, Project State, Result Ledger and Sales Intelligence rather than creating another source of truth.
-2. Integrate #74 into the existing BRODETAIL TV only after the Brain query boundary is usable: local wake word `Броди`, short voice session, text + TTS overlay, no ambient cloud audio persistence.
-3. Continue #70/#53/#63/#71 only through their existing isolated gates; do not let those older threads become dependencies for Control Room or Brain.
+1. On the physical studio TV, grant Chrome microphone permission once if requested and say `Броди, сколько сегодня задач вообще?`; if the real-owner wake passes, evaluate #74 for `status:done`.
+2. Continue #73 by adding a safe autonomous refresh path for the sanitized private-GitHub/Project-State control cache without copying GitHub credentials to the VPS.
+3. Continue #70/#53/#63/#71 only through their existing isolated gates.
 
 ## NEW-SESSION BOOTSTRAP — EXACTLY 8 STEPS
 
