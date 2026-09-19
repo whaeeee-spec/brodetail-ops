@@ -31,7 +31,7 @@ Other words are not operational statuses. GitHub workflow labels, worker result 
 
 - #73 — BRODETAIL Brain v0.1: `status:in-progress`. Live CRM/service/client/order/task/revenue context is deployed. Remaining scope: safe autonomous refresh of sanitized private-GitHub/Project-State context without copying GitHub credentials to the VPS.
 - #74 — Brodi TV wake word: `status:review`. Production contour exists, but real owner physical-mic acceptance is still not PASS.
-- #53 — Ads rollout: `status:blocked`. Package v2 is import-ready / ACTIVE=0; current gate is fresh Yandex/VK cabinet auth/preflight + current goal/budget verification + 15 real VK assets.
+- #53 — Ads rollout: `status:blocked`. Fresh Yandex Direct + Metrika read-only preflight is complete (2026-09-20): campaign 714358378 is DRAFT Search at 4,900 RUB/week, account cap <=7,000 RUB/week, counter 100268629 is linked, `lead_success` and all five service-goal IDs are active in Metrika. Direct still renders those five selected goals as `Цель не найдена`; reconcile that before activation. VK Ads cloud profile is not authenticated, 15 real VK assets are still required, and the prepared v2 import package remains on the offline authorized desktop. All entities stay ACTIVE=0.
 - #71 — Website lead notifications → VK internal chat: `status:blocked` on secure server-side VK community auth + verified destination.
 - #72 — Yan website + ChatGPT read-only verification: `status:blocked`. Public site is healthy but no Yan widget is visible; backend flag/Chatium/mirror/MCP runtime needs the authorized local read path, currently unavailable.
 - #70 — AI Visibility intervention: intervention commit `3583c447fbed9cac6c1cc91591a47bcf752de339` is ready with tests/build/preview PASS. Remaining: integrate into canonical site, deploy minimal release, re-run the same 40-prompt baseline. Authorized desktop is currently offline.
@@ -53,7 +53,7 @@ Other words are not operational statuses. GitHub workflow labels, worker result 
 
 - #74: physical studio wake-word acceptance still fails from the owner's perspective. Do not close until the main dashboard visibly proves mic/model/wake/last-heard and a real owner utterance succeeds.
 - #73: sanitized private-GitHub/Project-State context is not autonomously refreshed; CRM facts are already live.
-- #53: `CABINET_AUTH_AND_ASSETS_GATE` — fresh authenticated Yandex/VK preflight, current campaign/goal/budget verification and 15 real VK assets. Ads remain ACTIVE=0.
+- #53: Yandex/Metrika preflight is now verified; remaining gate is Direct-side `Цель не найдена` reconciliation, access to the existing v2 import package on the offline desktop, authenticated VK Ads access, and 15 real VK assets. Ads remain ACTIVE=0.
 - #71: secure VK community credential + verified destination peer/conversation are required; no secret may be recovered from old chats/GitHub.
 - #72: `AUTHORIZED_YAN_RUNTIME_READ_PATH_UNAVAILABLE` while the authorized BRODETAIL desktop is offline.
 - #70: deployment/remeasurement cannot safely continue until the authorized canonical-site checkout is reachable; intervention commit is preserved and must not be rebuilt.
@@ -104,7 +104,7 @@ Other words are not operational statuses. GitHub workflow labels, worker result 
 
 1. When DESKTOP-AT4EDO1 is online, resume #74 first from real main-dashboard mic diagnostics; do not repeat synthetic wake work.
 2. Then finish #73 autonomous control-plane refresh using a credential-isolated path.
-3. Re-enter #53 only through the fresh authenticated cabinet/assets gate; keep ACTIVE=0 until PASS.
+3. Re-enter #53 from the verified 2026-09-20 Yandex/Metrika snapshot: do not repeat that audit. Reconcile Direct's stale `Цель не найдена` display, import the existing v2 package PAUSED when desktop access returns, then finish VK auth/assets. Keep ACTIVE=0 until PASS.
 4. Re-enter #71 only when secure VK auth + destination are available.
 5. Re-enter #72 through the authorized read-only Yan/Chatium/mirror/MCP runtime path.
 6. Start #76 only after a fresh non-overlap check; reuse closed #63 v1.0 contract.
