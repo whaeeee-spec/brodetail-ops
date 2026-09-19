@@ -19,7 +19,7 @@
 | CRM Core | `READY` | Issue #56 production backfill/cutover completed: PostgreSQL is canonical operational target, relation integrity PASS, idempotency reruns planned zero new inserts, legacy D1 retained only as frozen historical backup/read source. |
 | Canonical inbound Website/VK/Avito | `READY` | Issue #57 closed `status:done`; Website/VK/Avito canonical PostgreSQL intake revalidated after #56, source attribution/idempotency PASS. Outbound SEND remains OFF. |
 | Yan LIVE | `PARTIAL` | Deterministic CRM intake does not depend on Yan/OpenAI. AI worker and customer SEND remain OFF in the latest verified CRM runtime evidence. |
-| Sales Intelligence / CHAT_OUTCOME | `READY` | Issue #46 closed `status:done`; fresh redacted CRM export/preflight/materialization PASS, 2,755 conversation outputs deterministic. Historical archive cannot truthfully receive commercial outcomes from currently available identifiers; zero-linkage outcomes remain null/INSUFFICIENT_LINKAGE. |
+| Sales Intelligence / CHAT_OUTCOME | `READY` | Issue #46 closed `status:done`; fresh redacted CRM export/preflight/materialization PASS, 2,755 conversation outputs deterministic. Historical archive cannot truthfully receive commercial outcomes from currently available identifiers; zero-linkage outcomes remain null/INSUFFICIENT_LINKAGE. Issue #68 Yan Evaluator and #69 Sales Memory are also closed `status:done`: all 2,755 rows are deterministically evaluated/registered, but CRM-verified outcome-learning support remains 0 and production activation remains 0. |
 | CRM reconciliation | `READY` | Issue #56 completed production backfill/cutover; #47 offline readiness is closed and consumed by #56/#57. |
 | Development Jobs / Task Router | `READY` | Issue #59 Windows state-write/Result Relay repair remains healthy; issue #62 Agent OS contract rework is closed `status:done`. |
 | Result Relay | `PARTIAL` | Single canonical Result Ledger remains issue #43; completeness/guard work #50 and Windows relay repair #59 are done. Post-2026-09-16 ledger completeness has not been independently revalidated in this promotion pass, so do not infer every newer topic receipt is mirrored without checking #43. |
@@ -44,6 +44,8 @@
 - #57 canonical inbound activation: closed `status:done`; Website/VK/Avito intake PASS, SEND OFF.
 - #59 Task Router state-write repair: closed `status:done`; revalidation PASS.
 - #66 Brodi Voice: closed `status:done`; browser voice pilot PASS, PBX/customer calls OFF.
+- #68 Yan Evaluator v0.1: closed `status:done`; 2,755/2,755 classified, deterministic/byte-identical rerun PASS, historical CRM outcome-learning eligible rows = 0, no production/runtime changes.
+- #69 Sales Memory v0.1: closed `status:done`; 10/10 behavioral candidate signals registered, all remain `OBSERVED_BEHAVIOR_ONLY`, promotion-ready/approved/production-active = 0, no CRM/Yan runtime/SEND changes.
 
 ## CURRENT BLOCKERS
 
@@ -57,6 +59,7 @@
 - D1/Chatium/Sites operational-writer designs are historical/legacy where they conflict with the canonical PostgreSQL writer boundary.
 - Do not turn readiness/canary packages into production writes without the approval/gates stated by the current issue.
 - Outbound VK/Avito SEND and PBX customer calling remain OFF unless separately approved and verified.
+- Historical Sales Intelligence associations are behavioral evidence only. Until sufficient CRM-verified EXACT outcomes exist, they must not be promoted as causal winning/losing rules or activated in Yan production.
 
 ## CANONICAL POINTERS
 
@@ -78,13 +81,15 @@
 - The old Website/VK/Avito “offline readiness only” state is STALE: #57 production canonical intake is active and revalidated, while SEND remains OFF.
 - The old Agent OS/Task Router in-progress state in this file is STALE: #59 and #62 are closed done.
 - Voice/Brodi was previously deferred from TV; #66 is now closed with browser-pilot PASS. PBX/customer calling remains a separate disabled capability.
+- The older plan to promote HIGH-confidence historical chat patterns directly into production Yan is superseded by #68/#69 evidence gating: current historical signals remain non-promotable until CRM-verified outcome support reaches the defined review gate.
 
 ## NEXT BEST ACTION
 
 1. Revalidate open #45 against current canonical site/CRM/runtime; either close it with terminal evidence or define the smallest remaining deploy/smoke.
 2. Keep #63 blocked until its v1.0 handoff gates are actually clear; then implement only on the canonical intake/finance relations with deterministic attribution/idempotency tests.
 3. Treat #64 as a separate SaaS product: open isolated repository/bootstrap only after explicit approval and without copying BRODETAIL production data/secrets/raw chats.
-4. Before reporting a new Work/Codex result, verify topic receipt plus canonical Result Ledger #43; do not revive stale blockers from old chats.
+4. For Sales Intelligence, accumulate new CRM-verified EXACT outcomes through the canonical VK/Avito identity path; keep Sales Memory production activation OFF until evidence reaches the review gate and explicit owner/coordinator approval is recorded.
+5. Before reporting a new Work/Codex result, verify topic receipt plus canonical Result Ledger #43; do not revive stale blockers from old chats.
 
 ## NEW-SESSION BOOTSTRAP — EXACTLY 8 STEPS
 
