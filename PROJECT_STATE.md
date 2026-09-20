@@ -24,16 +24,15 @@ Other words are not operational statuses. GitHub workflow labels, worker result 
 | CRM reconciliation | `UNKNOWN` | Issue #56 is closed, but production reconciliation/backfill evidence was not re-audited deeply enough here to claim a current operational status. |
 | Development Jobs / Task Router | `READY` | Agent OS contract rework #62 was manually evaluated PASS 100/100 and published at commit `fd1e3fe`; reliability fixes #59 and #60 are closed `status:done`. Fresh GitHub search found no `status:ready` or `status:in-progress` job. |
 | Result Relay | `READY` | Canonical Result Ledger #43 remains the permanent feed. Parent #36 and real Work acceptance #49 are now closed completed after the supported Work → GitHub → ledger path was proven exactly-once. |
-| BRODETAIL TV | `PARTIAL` | Canonical route `https://бродетаил.рф/tv/` is live. Latest verified image is `brodetail-tv:20260919-094849`. Brain/query and synthetic wake/no-wake tests pass, but the owner still reported that the physical studio browser did not hear the real wake phrase; #74 remains in review. |
+| BRODETAIL TV | `PARTIAL` | Canonical route `https://бродетаил.рф/tv/` is live. Latest deployed image verified in this session: `brodetail-tv:20260919-231254`. Main-dashboard MIC/MODEL/WAKE/BRAIN diagnostics and physical Arctis selection are deployed; synthetic safety/tests pass, but one real owner wake-word utterance is still required before #74 can close. |
 | Integrations / infrastructure | `UNKNOWN` | No comprehensive current DNS/Caddy/provider/webhook audit was performed in this finalization. |
 
 ## ACTIVE DEVELOPMENT JOBS
 
-- #73 — BRODETAIL Brain v0.1: `status:in-progress`. Live CRM/service/client/order/task/revenue context is deployed. Remaining scope: safe autonomous refresh of sanitized private-GitHub/Project-State context without copying GitHub credentials to the VPS.
-- #74 — Brodi TV wake word: `status:review`. Production contour exists, but real owner physical-mic acceptance is still not PASS.
-- #53 — Ads rollout: `status:blocked`. Fresh Yandex Direct + Metrika read-only preflight is complete (2026-09-20): campaign 714358378 is DRAFT Search at 4,900 RUB/week, account cap <=7,000 RUB/week, counter 100268629 is linked, `lead_success` and all five service-goal IDs are active in Metrika. Direct still renders those five selected goals as `Цель не найдена`; reconcile that before activation. VK Ads cloud profile is not authenticated, 15 real VK assets are still required, and the prepared v2 import package remains on the offline authorized desktop. All entities stay ACTIVE=0.
+- #74 — Brodi TV wake word: `status:review`. Main-dashboard voice diagnostics are deployed in `brodetail-tv:20260919-231254`; real owner physical wake-word acceptance is still not PASS.
+- #53 — Ads rollout: `status:blocked`. Fresh Direct recheck on 2026-09-20 shows campaign 714358378 PAUSED at 4,900 RUB/week with all five service goals resolved by name and no `Цель не найдена`. Marketing layer/new approved creatives are being prepared. Remaining launch gates are the public-domain/Caddy release mismatch, safe form→Metrika→CRM E2E proof, and authenticated/correct VK Ads account + conversion path. Keep traffic off until those acceptance checks pass.
 - #71 — Website lead notifications → VK internal chat: `status:blocked` on secure server-side VK community auth + verified destination.
-- #72 — Yan website + ChatGPT read-only verification: `status:blocked`. Public site is healthy but no Yan widget is visible; backend flag/Chatium/mirror/MCP runtime needs the authorized local read path, currently unavailable.
+- #72 — Yan website + ChatGPT read-only verification: `status:blocked`. Authorized runtime read is now available: public `/api/chat` returns 503, current Caddy holds the route, `YAN_WEBSITE_CHAT_ENABLED` and selftest flag are UNSET, while Chatium adapter URLs are configured. Read-only shadow health reports mirror/MCP ONLINE, but authenticated data freshness and VK/Avito channel state remain unverified.
 - #70 — AI Visibility intervention: intervention commit `3583c447fbed9cac6c1cc91591a47bcf752de339` is ready with tests/build/preview PASS. Remaining: integrate into canonical site, deploy minimal release, re-run the same 40-prompt baseline. Authorized desktop is currently offline.
 - #75 — BroWheel + Cabinet canonical writer production completion: successor to old #32; reuse #45/#51, do not rebuild them.
 - #76 — QR flyer attribution + CRM ROI implementation: successor to completed #63 specification v1.0.
@@ -51,11 +50,10 @@ Other words are not operational statuses. GitHub workflow labels, worker result 
 
 ## CURRENT BLOCKERS
 
-- #74: physical studio wake-word acceptance still fails from the owner's perspective. Do not close until the main dashboard visibly proves mic/model/wake/last-heard and a real owner utterance succeeds.
-- #73: sanitized private-GitHub/Project-State context is not autonomously refreshed; CRM facts are already live.
-- #53: Yandex/Metrika preflight is now verified; remaining gate is Direct-side `Цель не найдена` reconciliation, access to the existing v2 import package on the offline desktop, authenticated VK Ads access, and 15 real VK assets. Ads remain ACTIVE=0.
-- #71: secure VK community credential + verified destination peer/conversation are required; no secret may be recovered from old chats/GitHub.
-- #72: `AUTHORIZED_YAN_RUNTIME_READ_PATH_UNAVAILABLE` while the authorized BRODETAIL desktop is offline.
+- #74: real owner wake-word acceptance is still pending; diagnostics are deployed and must be used for the final physical proof.
+- #53: Direct goal binding is now clean; remaining launch gates are public-domain/Caddy correctness, safe service-form→Metrika→CRM E2E proof, and authenticated/correct VK Ads account + conversion path.
+- #71: secure VK community credential + verified destination peer/conversation are required; current canonical commerce route still uses the post-persistence Telegram notifier rather than a deployed VK notifier.
+- #72: website Yan is currently OFF on the public domain (route held + enable flag unset). Read-only shadow transport is healthy, but authenticated mirror data freshness and VK/Avito channel state remain unverified.
 - #70: deployment/remeasurement cannot safely continue until the authorized canonical-site checkout is reachable; intervention commit is preserved and must not be rebuilt.
 - #75/#76/#77: newly isolated successor scopes; do not start inside conflicting production worktrees.
 
@@ -96,21 +94,21 @@ Other words are not operational statuses. GitHub workflow labels, worker result 
 - #32: old broad Phase-2 issue closed as superseded by focused #75; completed #45/#51 evidence remains canonical.
 - #63: QR flyer ROI measurement specification v1.0 frozen and closed; implementation moved to #76.
 - #64: BRODETAIL Sales OS product-definition phase closed; engineering bootstrap moved to #77.
+- #73: BRODETAIL Brain v0.1 autonomous sanitized control-plane refresh completed and issue closed; GitHub credential remains on the owner desktop, VPS receives only derived JSON through a read-only runtime mount.
 - #62: Agent OS canonical contract rework accepted PASS 100/100.
 - #65: BRODETAIL AI Visibility baseline completed and closed.
 - #66: BRODETAIL Voice/Brodi external PBX engine candidate adoption completed and closed.
 
 ## NEXT BEST ACTION
 
-1. When DESKTOP-AT4EDO1 is online, resume #74 first from real main-dashboard mic diagnostics; do not repeat synthetic wake work.
-2. Then finish #73 autonomous control-plane refresh using a credential-isolated path.
-3. Re-enter #53 from the verified 2026-09-20 Yandex/Metrika snapshot: do not repeat that audit. Reconcile Direct's stale `Цель не найдена` display, import the existing v2 package PAUSED when desktop access returns, then finish VK auth/assets. Keep ACTIVE=0 until PASS.
-4. Re-enter #71 only when secure VK auth + destination are available.
-5. Re-enter #72 through the authorized read-only Yan/Chatium/mirror/MCP runtime path.
-6. Start #76 only after a fresh non-overlap check; reuse closed #63 v1.0 contract.
-7. Finish #70 from existing intervention commit `3583c447...`; deploy and re-run the same 40 prompts.
-8. Start #77 only in an isolated SaaS repository/project; do not clone current BRODETAIL production.
-9. #75 resumes only from canonical-writer integration; do not redo #45/#51.
+1. Finish #53 launch acceptance without repeating the already-clean Direct goal audit: public-domain/Caddy release, ad/landing offer consistency, safe form→Metrika→CRM E2E, then Yandex launch; finish VK only after correct account/auth/conversion-path proof.
+2. #74 needs one real owner wake-word utterance on the deployed main-dashboard diagnostics; do not repeat synthetic wake tuning first.
+3. Re-enter #71 only when secure VK auth + destination are available; preserve CRM-first/best-effort ordering.
+4. Continue #72 with authenticated read-only mirror/MCP data freshness plus VK/Avito channel verification; do not enable website Yan inside the read-only finalization.
+5. Start #76 from the already-present v1.0 attribution/idempotency path; first close the trusted-QA no-notification canary gap, then deterministic finance/ROI linkage.
+6. Finish #70 from existing intervention commit `3583c447...`; deploy and re-run the same 40 prompts.
+7. Start #77 only in an isolated SaaS repository/project; do not clone current BRODETAIL production.
+8. #75 resumes only from canonical-writer integration; do not redo #45/#51.
 
 ## NEW-SESSION BOOTSTRAP — EXACTLY 8 STEPS
 
