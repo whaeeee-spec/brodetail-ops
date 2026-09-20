@@ -54,7 +54,7 @@ Do **not** delete yet unless that exact chat itself has an explicit FINALIZATION
 - #53 — Ads: BLOCKED on public-domain/Caddy correctness, safe form→Metrika→CRM E2E proof, and authenticated/correct VK Ads account + conversion path; Yandex goal binding itself is now clean.
 - #70 — AI Visibility intervention: existing commit `3583c447...` ready; canonical deploy + same-40 remeasurement remain.
 - #71 — VK internal lead notifications: BLOCKED on secure community auth + destination; CRM-first ordering already exists, but deployed notifier is still Telegram rather than VK.
-- #72 — Yan runtime verification: website Yan is currently OFF on the public domain; read-only shadow transport is healthy, while authenticated data freshness and VK/Avito channel state remain open.
+- #72 — Yan runtime/read-only finalization completed and closed: website Yan OFF; VK/Avito mirror LIVE with fresh data; MCP health ONLINE but authenticated external invocation evidence remains UNKNOWN.
 - #74 — Brodi TV wake word: REVIEW; main-dashboard diagnostics deployed, real physical owner wake not yet accepted.
 - #75 — BroWheel/Cabinet canonical writer production completion; successor to closed #32/#45/#51 history.
 - #76 — QR flyer attribution + CRM ROI implementation; successor to closed specification #63.
