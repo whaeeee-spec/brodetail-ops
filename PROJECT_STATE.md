@@ -31,7 +31,7 @@ Other words are not operational statuses. GitHub workflow labels, worker result 
 
 - #74 — Brodi TV wake word: `status:review`. Main-dashboard voice diagnostics are deployed in `brodetail-tv:20260919-231254`; real owner physical wake-word acceptance is still not PASS.
 - #53 — Ads rollout: `status:blocked`. Fresh Direct recheck on 2026-09-20 shows campaign 714358378 PAUSED at 4,900 RUB/week with all five service goals resolved by name and no `Цель не найдена`. Marketing layer/new approved creatives are being prepared. Remaining launch gates are the public-domain/Caddy release mismatch, safe form→Metrika→CRM E2E proof, and authenticated/correct VK Ads account + conversion path. Keep traffic off until those acceptance checks pass.
-- #71 — Website lead notifications → VK internal chat: `status:blocked` on secure server-side VK community auth + verified destination.
+- #78 — VK internal lead notifier implementation/release: `status:inbox`. Secure VK notification credential + destination are now verified read-only; current production gap is only the narrow canonical CRM post-persistence VK notifier + synthetic canary. Successor to completed #71.
 - #70 — AI Visibility intervention: intervention commit `3583c447fbed9cac6c1cc91591a47bcf752de339` is ready with tests/build/preview PASS. Remaining: integrate into canonical site, deploy minimal release, re-run the same 40-prompt baseline. Authorized desktop is currently offline.
 - #75 — BroWheel + Cabinet canonical writer production completion: successor to old #32; reuse #45/#51, do not rebuild them.
 - #76 — QR flyer attribution + CRM ROI implementation: successor to completed #63 specification v1.0.
@@ -51,7 +51,7 @@ Other words are not operational statuses. GitHub workflow labels, worker result 
 
 - #74: real owner wake-word acceptance is still pending; diagnostics are deployed and must be used for the final physical proof.
 - #53: Direct goal binding is now clean; remaining launch gates are public-domain/Caddy correctness, safe service-form→Metrika→CRM E2E proof, and authenticated/correct VK Ads account + conversion path.
-- #71: secure VK community credential + verified destination peer/conversation are required; current canonical commerce route still uses the post-persistence Telegram notifier rather than a deployed VK notifier.
+- #78: secure VK auth/destination are verified; current canonical commerce route still uses the post-persistence Telegram notifier. Implement the narrow VK notifier with TEST skip/idempotency/failure isolation, then run one synthetic owner-safe canary.
 - #70: deployment/remeasurement cannot safely continue until the authorized canonical-site checkout is reachable; intervention commit is preserved and must not be rebuilt.
 - #75/#76/#77: newly isolated successor scopes; do not start inside conflicting production worktrees.
 
@@ -92,6 +92,7 @@ Other words are not operational statuses. GitHub workflow labels, worker result 
 - #32: old broad Phase-2 issue closed as superseded by focused #75; completed #45/#51 evidence remains canonical.
 - #63: QR flyer ROI measurement specification v1.0 frozen and closed; implementation moved to #76.
 - #64: BRODETAIL Sales OS product-definition phase closed; engineering bootstrap moved to #77.
+- #71: VK internal lead-notification gating completed and closed after secure auth/destination verification; implementation/release moved to #78.
 - #72: Yan/read-only finalization completed and closed. Website Yan is OFF on the public domain; fresh remote mirror evidence proves VK/Avito mirror LIVE with 108 conversations / 897 messages. MCP health is ONLINE but authenticated external MCP invocation remains UNKNOWN by design/no current tool-event evidence.
 - #73: BRODETAIL Brain v0.1 autonomous sanitized control-plane refresh completed and issue closed; GitHub credential remains on the owner desktop, VPS receives only derived JSON through a read-only runtime mount.
 - #62: Agent OS canonical contract rework accepted PASS 100/100.
@@ -102,7 +103,7 @@ Other words are not operational statuses. GitHub workflow labels, worker result 
 
 1. Finish #53 launch acceptance without repeating the already-clean Direct goal audit: public-domain/Caddy release, ad/landing offer consistency, safe form→Metrika→CRM E2E, then Yandex launch; finish VK only after correct account/auth/conversion-path proof.
 2. #74 needs one real owner wake-word utterance on the deployed main-dashboard diagnostics; do not repeat synthetic wake tuning first.
-3. Re-enter #71 only when secure VK auth + destination are available; preserve CRM-first/best-effort ordering.
+3. Implement #78 from the already-verified secure VK auth/destination using only the narrow notifier semantics from historical commit `91d2297...`; do not cherry-pick the old flyer bundle.
 4. Start #76 from the already-present v1.0 attribution/idempotency path; first close the trusted-QA no-notification canary gap, then deterministic finance/ROI linkage.
 5. Finish #70 from existing intervention commit `3583c447...`; deploy and re-run the same 40 prompts.
 6. Start #77 only in an isolated SaaS repository/project; do not clone current BRODETAIL production.
