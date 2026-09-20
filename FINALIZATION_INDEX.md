@@ -23,7 +23,7 @@ Topic-specific open work lives in its current GitHub issue.
 | Sales Intelligence / Yan Evaluator / Sales Memory | PASS | `PROJECT_STATE.md` + Result Ledger #43; #68/#69 receipts promoted | Wait for CRM-verified outcomes; Sales Memory needs sufficient outcome-supported examples before promotion | YES |
 | Ads Operating System / commercial rollout | FINALIZATION PASS | Issue #53 | #53 stays open. Current target 714358378 is PAUSED at 4,900 RUB/week with clean service-goal binding. Remaining launch gates: public-domain/Caddy correctness, safe form→Metrika→CRM E2E proof, and authenticated/correct VK Ads account + conversion path. | YES |
 | Site rollout / homepage regression / glass-era site history | FINALIZED / historical complete | Issue #55 + Result Ledger #43 + current site pointer + #52/#67 evidence | No old-thread work remains. Future site work must use `CANONICAL_SITE_SOURCE.txt -> site-production-canonical` | YES |
-| Flyer / Agent OS / VK notification history | PASS | `PROJECT_STATE.md` + Result Ledger #43 + closed #63 + #71 + #76 | #63 spec is complete/closed; implementation is #76; #71 remains blocked on secure VK auth/destination; #70 remains separate | YES |
+| Flyer / Agent OS / VK notification history | PASS | `PROJECT_STATE.md` + Result Ledger #43 + closed #63/#71 + #76/#78 | #63 spec is complete/closed; ROI implementation is #76. #71 gating is complete/closed after secure VK auth/destination verification; notifier implementation/release is #78. | YES |
 | General project-state cleanup / control-plane consolidation | PASS | `PROJECT_STATE.md` + Result Ledger #43 | Current work is represented by current issues; previous chat is non-authoritative | YES |
 | BRODETAIL Voice / Brodi browser pilot | COMPLETED | Issue #66 + `PROJECT_STATE.md` | Browser voice pilot complete; PBX/customer calls remain off. Brain v0.1 #73 is now completed; remaining TV voice acceptance is #74 only. | YES for the completed #66 implementation thread |
 
@@ -53,7 +53,7 @@ Do **not** delete yet unless that exact chat itself has an explicit FINALIZATION
 
 - #53 — Ads: BLOCKED on public-domain/Caddy correctness, safe form→Metrika→CRM E2E proof, and authenticated/correct VK Ads account + conversion path; Yandex goal binding itself is now clean.
 - #70 — AI Visibility intervention: existing commit `3583c447...` ready; canonical deploy + same-40 remeasurement remain.
-- #71 — VK internal lead notifications: BLOCKED on secure community auth + destination; CRM-first ordering already exists, but deployed notifier is still Telegram rather than VK.
+- #78 — VK internal lead notifier implementation/release: secure auth/destination verified; narrow canonical post-persistence notifier + synthetic canary remain. Successor to completed #71.
 - #72 — Yan runtime/read-only finalization completed and closed: website Yan OFF; VK/Avito mirror LIVE with fresh data; MCP health ONLINE but authenticated external invocation evidence remains UNKNOWN.
 - #74 — Brodi TV wake word: REVIEW; main-dashboard diagnostics deployed, real physical owner wake not yet accepted.
 - #75 — BroWheel/Cabinet canonical writer production completion; successor to closed #32/#45/#51 history.
