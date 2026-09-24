@@ -2,7 +2,7 @@
 
 `schema: brodetail.project-state/v0.1`
 
-- Last verified: `2026-09-20` (Europe/Moscow)
+- Last verified: `2026-09-24` (Europe/Moscow)
 - Canonical path: `brodetail-ops/PROJECT_STATE.md`
 - Canonical writer: Evaluator/Coordinator; scoped worker only when the Development Job explicitly allows it
 - Overall status: `IN_PROGRESS`
@@ -11,56 +11,59 @@
 
 `READY | PARTIAL | BLOCKED | DEGRADED | IN_PROGRESS | LEGACY | UNKNOWN`
 
-Other words are not operational statuses. GitHub workflow labels, worker result states and Development Evaluator verdicts use separate vocabularies.
+This is a selective verified snapshot. GitHub issues remain the live backlog/job source; Result Ledger #43 remains delivery evidence.
 
 ## SYSTEM STATUS
 
 | System contour | Status | Verified evidence / limit |
 | --- | --- | --- |
-| Public Site | `PARTIAL` | Canonical pointer is `E:\BRODETAIL\CANONICAL_SITE_SOURCE.txt -> site-production-canonical`. Result Ledger receipt `chatgpt-flyer-singleform-hotfix-20260910` proves a production `/flyer` single-step form release with public smoke on 2026-09-10. Later isolated website/flyer receipts reviewed here explicitly reported no production deploy; full current site release was not re-smoked in this finalization. |
-| CRM Core | `PARTIAL` | Issue #57 is closed `status:done`; Result Ledger receipt `work-crm-readiness-post-inbound-20260916-01` verifies the intentional CRM-inbound-ON / outbound-SEND-off readiness mode and focused tests. Full current API/data health was not re-audited here. |
-| Yan LIVE | `UNKNOWN` | Runtime/provider/channel behavior was not inspected in this finalization. |
-| Sales Intelligence / `CHAT_OUTCOME` | `UNKNOWN` | Current pipeline/output health was not inspected in this finalization. |
-| CRM reconciliation | `UNKNOWN` | Issue #56 is closed, but production reconciliation/backfill evidence was not re-audited deeply enough here to claim a current operational status. |
-| Development Jobs / Task Router | `READY` | Agent OS contract rework #62 was manually evaluated PASS 100/100 and published at commit `fd1e3fe`; reliability fixes #59 and #60 are closed `status:done`. Fresh GitHub search found no `status:ready` or `status:in-progress` job. |
-| Result Relay | `READY` | Canonical Result Ledger #43 remains the permanent feed. Parent #36 and real Work acceptance #49 are now closed completed after the supported Work → GitHub → ledger path was proven exactly-once. |
-| BRODETAIL TV | `PARTIAL` | Canonical route `https://бродетаил.рф/tv/` is live. Latest deployed image verified in this session: `brodetail-tv:20260919-231254`. Main-dashboard MIC/MODEL/WAKE/BRAIN diagnostics and physical Arctis selection are deployed; synthetic safety/tests pass, but one real owner wake-word utterance is still required before #74 can close. |
-| Integrations / infrastructure | `UNKNOWN` | No comprehensive current DNS/Caddy/provider/webhook audit was performed in this finalization. |
+| Public Site | `READY` | Canonical pointer remains `E:\BRODETAIL\CANONICAL_SITE_SOURCE.txt -> site-production-canonical`. #81 closed `status:done`: Yan widget and production `/api/chat` are live; canonical build/test 140/140 PASS and browser/public smoke passed. |
+| CRM Core | `PARTIAL` | Canonical CRM/PostgreSQL remains the operational writer. #75 production BroWheel/Cabinet writer integration is done. #80 still tracks trusted TEST marker propagation; #83 also found Avito/VK source attribution defaulting to WEBSITE. |
+| Yan LIVE | `PARTIAL` | Current runtime is Yan Web / OpenAI Responses with `gpt-5.6-sol`; #81 production website path is done and #83 confirms Yan Web health plus running Avito/VK transports. Real customer booking E2E and correct source attribution are not yet verified. |
+| Chatium | `LEGACY` | NOT USED as the current Yan decision path. Current configs mark `chatiumBridge` DISABLED / REMOVED_FROM_VK_AVITO_DECISION_PATH. #72 Chatium-primary architecture is SUPERSEDED by #81/#83 and current runtime evidence. |
+| BRODETAIL Brain | `READY` | #73 closed `status:done`; owner-facing Brain v0.1 reads canonical/live sources with provenance. Brain query layer remains read-only. |
+| Sales Intelligence / CHAT_OUTCOME | `PARTIAL` | #68/#69 done. #82 continuous learning loop runs every 15 minutes and latest reanalysis covers 2,900 dialogs / 28,598 messages; full historical VK refresh remains blocked by missing supported API credential. |
+| Development Jobs / Task Router | `READY` | Agent OS and Result Relay contracts are active; GitHub issues are the live work queue. |
+| Result Relay | `READY` | Existing Result Ledger #43 remains the single canonical result feed. || BRODETAIL TV / Brodi Operator | `PARTIAL` | #74 is `status:review`. Production image `brodetail-tv:20260924-201902` includes Brain voice, Yandex STT/TTS, operator actions, music bridge and new-order announcements; current local tests 24/24 PASS. Final physical owner wake/STT acceptance remains. |
+| Ads | `BLOCKED` | #53 remains blocked; do not infer launch readiness from older audit reports. |
+| AI Visibility | `BLOCKED` | Baseline #65 is complete. Intervention #70 remains open pending canonical deploy and same-40 remeasurement; the old desktop-offline blocker is no longer current because the authorized desktop is online. |
+| Integrations / infrastructure | `PARTIAL` | #78 VK internal notifier and #75 BroWheel/Cabinet are done; #83 Yan Web + Avito/VK transport health passed. Call Intelligence #79, TEST marker #80 and channel attribution remain open. |
 
 ## ACTIVE DEVELOPMENT JOBS
 
-- #74 — Brodi TV wake word: `status:review`. Main-dashboard voice diagnostics are deployed in `brodetail-tv:20260919-231254`; real owner physical wake-word acceptance is still not PASS.
-- #53 — Ads rollout: `status:blocked`. Fresh Direct recheck on 2026-09-20 shows campaign 714358378 PAUSED at 4,900 RUB/week with all five service goals resolved by name and no `Цель не найдена`. Marketing layer/new approved creatives are being prepared. Remaining launch gates are the public-domain/Caddy release mismatch, safe form→Metrika→CRM E2E proof, and authenticated/correct VK Ads account + conversion path. Keep traffic off until those acceptance checks pass.
-- #78 — VK internal lead notifier implementation/release: `status:inbox`. Secure VK notification credential + destination are now verified read-only; current production gap is only the narrow canonical CRM post-persistence VK notifier + synthetic canary. Successor to completed #71.
-- #70 — AI Visibility intervention: intervention commit `3583c447fbed9cac6c1cc91591a47bcf752de339` is ready with tests/build/preview PASS. Remaining: integrate into canonical site, deploy minimal release, re-run the same 40-prompt baseline. Authorized desktop is currently offline.
-- #75 — BroWheel + Cabinet canonical writer production completion: successor to old #32; reuse #45/#51, do not rebuild them.
-- #76 — QR flyer attribution + CRM ROI implementation: successor to completed #63 specification v1.0.
-- #77 — BRODETAIL Sales OS isolated SaaS engineering bootstrap + slice 1: successor to completed #64 product-definition phase.
+- #83 — `status:blocked`, latest worker result `PARTIAL`: phone-to-scheduling recovery, false handoff-loop suppression and dedup are deployed; blocker is real organic customer-to-CRM booking verification plus trusted Avito/VK source attribution.
+- #82 — `status:in-progress`: continuous Evaluator + Sales Memory loop is operational; full VK historical refresh remains unavailable without a supported API credential.
+- #74 — `status:review`: Brodi TV/operator is production-live; physical owner wake/STT acceptance remains.
+- #79 — `status:in-progress`: Call Intelligence. Historical “desktop offline” blocker is STALE; resume from fresh live Stage-1 verification.
+- #80 — `status:blocked`: preserve server-trusted TEST marker into canonical CRM lead materialization.
+- #53 — `status:blocked`: advertising rollout/acceptance.
+- #70 — `status:blocked`: AI Visibility intervention deploy + same-40 measurement.
+- #76 — `status:blocked`: QR flyer attribution/CRM ROI implementation.
+- #77 — `status:blocked`: isolated Sales OS SaaS engineering bootstrap.
+- #84 — future P2 benchmark: model quality/cost/latency/outcome economics after current Yan/Evaluator dependencies are stable.
 
 ## LAST VERIFIED ENGINEERING RESULT
 
-- Lifecycle cleanup on 2026-09-20 closed completed legacy issues #49, #36, #45 and #51.
-- Old broad #32 was superseded by focused #75 so completed Node/VPS compatibility (#45) and routing canary (#51) are preserved and not repeated.
-- #63 product/specification work is closed; implementation moved to #76 with the frozen v1.0 measurement contract.
-- #64 product-definition work is closed; isolated SaaS engineering moved to #77.
-- #72 public read-only inspection confirmed the main site is healthy but exposes no visible Yan/chat widget; backend/channel state remains UNKNOWN rather than guessed.
-- Latest verified #74 production image remains `brodetail-tv:20260919-094849`; synthetic safety/tests pass, real physical owner wake remains unaccepted.
+- #83 receipt `issue-83-yan-sales-loop-20260924` is the latest formal Yan delivery reviewed here: `PARTIAL`; Yan Web systemd/TLS health PASS, 12 scheduling/handoff regression scenarios PASS, Avito/VK transport processes running, no synthetic customer send or production appointment created.
+- #82 has a PASS operationalization receipt plus a later PARTIAL full-history reanalysis on 2026-09-24; scheduled task is enabled and last result was 0.
+- #74 latest production checkpoint on 2026-09-24 reports image `brodetail-tv:20260924-201902`, 24/24 local tests PASS and live music-bridge/new-order queue acceptance.
+- #81/#78/#75/#73 are closed `status:done` production/control-plane milestones from 2026-09-23.
 - `PROJECT_STATE_CHANGE: YES`.
 
 ## CURRENT BLOCKERS
 
-- #74: real owner wake-word acceptance is still pending; diagnostics are deployed and must be used for the final physical proof.
-- #53: Direct goal binding is now clean; remaining launch gates are public-domain/Caddy correctness, safe service-form→Metrika→CRM E2E proof, and authenticated/correct VK Ads account + conversion path.
-- #78: secure VK auth/destination are verified; current canonical commerce route still uses the post-persistence Telegram notifier. Implement the narrow VK notifier with TEST skip/idempotency/failure isolation, then run one synthetic owner-safe canary.
-- #70: deployment/remeasurement cannot safely continue until the authorized canonical-site checkout is reachable; intervention commit is preserved and must not be rebuilt.
-- #75/#76/#77: newly isolated successor scopes; do not start inside conflicting production worktrees.
+- #83: next organic Avito/VK continuation is required to prove real customer booking E2E; CRM source channel currently defaults to WEBSITE for Avito/VK.
+- #82: full historical VK refresh lacks a supported API credential; current incremental/live loop remains operational.
+- #74: final physical owner speech/wake acceptance is not yet closed.
+- #80: trusted TEST marker does not yet reliably persist into `leads.is_test`.
+- #53/#70/#76/#77 retain their own explicit acceptance/entry gates; do not convert them to READY from old chat claims.## CURRENT RISKS
 
-## CURRENT RISKS
-
-- Do not infer production website state from isolated visual/flyer worktrees: several later receipts explicitly remained local/not deployed.
-- Before changing `/flyer`, verify the current live payload and canonical source rather than assuming the 2026-09-10 release is still the newest release.
-- VK lead notification must remain downstream of successful canonical CRM persistence; VK failure must never fail or duplicate the CRM request.
-- Never place private invite links, tokens, cookies, raw customer data or destination secrets in GitHub/receipts.
+- Legacy Chatium artifacts remain on disk, including `autopilot/chatium-agent-v2/*`, `chatium-shadow-gateway.js`, historical restore scripts and old docs. They are HISTORY/LEGACY, not an allowed current execution path.
+- `autopilot/README.md` was stale before this audit and described DETECTION_ONLY while live config is OPENAI_LIVE; component docs must not override runtime/config.
+- `site-production-canonical` currently contains parallel dirty work. Never reset/clean or publish unrelated changes during another job.
+- `sales-intelligence` is a live local analytics workspace with substantial uncommitted artifacts; receipts/current reports, not Git history alone, are required to establish its latest state.
+- Old #72 and old Chatium prompts can resurrect a dead architecture if read without freshness checks.
+- #83 source-attribution defect can label Avito/VK-originated CRM records as WEBSITE until fixed.
 
 ## CANONICAL POINTERS
 
@@ -70,58 +73,45 @@ Other words are not operational statuses. GitHub workflow labels, worker result 
 - Public Site current repository: `E:\BRODETAIL\site-production-canonical`
 - System topology: `docs/architecture/SYSTEM_MAP.md`
 - Writer/source ownership: `docs/architecture/SOURCES_OF_TRUTH.md` and ADR-001
+- Chatium retirement / Yan runtime decision: `docs/architecture/ADR-003-YAN-RUNTIME-CHATIUM-RETIREMENT.md`
 - Development Job contract: `docs/agent-os/DEVELOPMENT_JOBS.md`
-- Optional ExecPlan contract: `docs/agent-os/EXECPLANS.md`
 - Development Evaluator: `docs/agent-os/EVALUATOR.md`
 - Project State update policy: `docs/agent-os/PROJECT_STATE_POLICY.md`
 - Result Ledger: GitHub issue #43
-- QR flyer ROI frozen contract: closed GitHub issue #63
-- QR flyer ROI implementation: GitHub issue #76
-- VK internal lead notifications: GitHub issue #71
-- BRODETAIL Brain: GitHub issue #73
-- Brodi TV wake-word: GitHub issue #74
-- BroWheel/Cabinet canonical writer completion: GitHub issue #75
-- Sales OS SaaS engineering: GitHub issue #77
+- Yan current runtime: `E:\BRODETAIL\yan-web-service` plus current transport/runtime config under `E:\BRODETAIL\autopilot`
+- Yan Continuous Learning: GitHub issue #82 / `E:\BRODETAIL\sales-intelligence`
+- Brodi TV: GitHub issue #74 / current production TV runtime
 
 ## RECENTLY COMPLETED
 
-- #49: real ChatGPT Work → canonical Result Ledger acceptance proven exactly-once and closed.
-- #36: Result Relay parent closed after #49 eliminated the remaining real-Work acceptance gap.
-- #45: Node/VPS compatibility integration for BroWheel/Cabinet completed locally and closed; production remainder moved to #75.
-- #51: public routing recovery production canary passed and closed.
-- #32: old broad Phase-2 issue closed as superseded by focused #75; completed #45/#51 evidence remains canonical.
-- #63: QR flyer ROI measurement specification v1.0 frozen and closed; implementation moved to #76.
-- #64: BRODETAIL Sales OS product-definition phase closed; engineering bootstrap moved to #77.
-- #71: VK internal lead-notification gating completed and closed after secure auth/destination verification; implementation/release moved to #78.
-- #72: Yan/read-only finalization completed and closed. Website Yan is OFF on the public domain; fresh remote mirror evidence proves VK/Avito mirror LIVE with 108 conversations / 897 messages. MCP health is ONLINE but authenticated external MCP invocation remains UNKNOWN by design/no current tool-event evidence.
-- #73: BRODETAIL Brain v0.1 autonomous sanitized control-plane refresh completed and issue closed; GitHub credential remains on the owner desktop, VPS receives only derived JSON through a read-only runtime mount.
-- #62: Agent OS canonical contract rework accepted PASS 100/100.
-- #65: BRODETAIL AI Visibility baseline completed and closed.
-- #66: BRODETAIL Voice/Brodi external PBX engine candidate adoption completed and closed.
+- #81: Yan online widget production rollout; OpenAI Responses / `gpt-5.6-sol` website brain.
+- #78: VK internal lead notifier canonical CRM integration and safe canary.
+- #75: BroWheel + Cabinet canonical CRM writer production completion.
+- #73: BRODETAIL Brain v0.1.
+- #68/#69: Yan Evaluator v0.1 and Sales Memory v0.1.
+- #72: historical Yan/read-only finalization is complete, but its Chatium-primary architecture conclusion is now SUPERSEDED.
 
 ## NEXT BEST ACTION
 
-1. Finish #53 launch acceptance without repeating the already-clean Direct goal audit: public-domain/Caddy release, ad/landing offer consistency, safe form→Metrika→CRM E2E, then Yandex launch; finish VK only after correct account/auth/conversion-path proof.
-2. #74 needs one real owner wake-word utterance on the deployed main-dashboard diagnostics; do not repeat synthetic wake tuning first.
-3. Implement #78 from the already-verified secure VK auth/destination using only the narrow notifier semantics from historical commit `91d2297...`; do not cherry-pick the old flyer bundle.
-4. Start #76 from the already-present v1.0 attribution/idempotency path; first close the trusted-QA no-notification canary gap, then deterministic finance/ROI linkage.
-5. Finish #70 from existing intervention commit `3583c447...`; deploy and re-run the same 40 prompts.
-6. Start #77 only in an isolated SaaS repository/project; do not clone current BRODETAIL production.
-7. #75 resumes only from canonical-writer integration; do not redo #45/#51.
+1. Finish #83 first: preserve the deployed fix, observe the next organic Avito/VK turn, verify CRM/calendar outcome and correct trusted source attribution without synthetic customer sends.
+2. Keep #82 learning loop running; solve the VK historical credential gap without weakening privacy/safety.
+3. Close #74 with physical owner wake/STT acceptance rather than repeating synthetic tuning.
+4. Fix #80 before relying on TEST-vs-real analytics.
+5. Resume #53/#70 only from fresh current production evidence; do not reuse obsolete blockers or Chatium-era architecture.
 
 ## NEW-SESSION BOOTSTRAP — EXACTLY 8 STEPS
 
 1. Determine the current workspace and its control plane.
-2. Read the root `E:\BRODETAIL\AGENTS.md`.
+2. Read root `E:\BRODETAIL\AGENTS.md`.
 3. Read canonical `brodetail-ops/PROJECT_STATE.md` and its `Last verified` date.
-4. Read `brodetail-ops/FINALIZATION_INDEX.md`, then identify active Development Jobs and the latest Task Router/GitHub checkpoint.
-5. Read relevant component `AGENTS.md` files for allowed paths.
-6. Read relevant ADR and `brodetail-ops/docs/architecture/SOURCES_OF_TRUTH.md`.
-7. Verify the latest Result Relay records when a state claim needs confirmation.
+4. Read `brodetail-ops/FINALIZATION_INDEX.md`, then inspect current GitHub Development Jobs and latest Task Router/GitHub checkpoint.
+5. Read relevant component `AGENTS.md` files.
+6. Read relevant ADR plus `brodetail-ops/docs/architecture/SOURCES_OF_TRUTH.md`.
+7. Verify latest Result Relay/runtime evidence when a current-state claim depends on it.
 8. Output `CURRENT STATE / ACTIVE JOBS / BLOCKERS / LAST VERIFIED RESULT / NEXT BEST ACTION`.
 
-Previous chat is non-authoritative. When it conflicts with canonical state, canonical state wins.
+Previous chat, old prompt and old report are non-authoritative. Newer confirmed runtime/canonical evidence wins.
 
 ## PROJECT_STATE_CHANGE
 
-`PROJECT_STATE_CHANGE: YES | NO` is decided only by the Development Evaluator/Coordinator. Worker evidence or assertion alone never verifies Project State.
+`PROJECT_STATE_CHANGE: YES`
